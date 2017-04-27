@@ -13,6 +13,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 @Entity
 public class Test {
 	@Id	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -25,8 +28,8 @@ public class Test {
 	@Column(name="test_date")
 	private Date testDate;
 
-	
-	@OneToMany(fetch=FetchType.LAZY)
+	@Fetch(FetchMode.SELECT)
+	@OneToMany(fetch=FetchType.EAGER)
 	@JoinTable(name="test_testquestion",
     		joinColumns=@JoinColumn(name="test_id", referencedColumnName="test_id"),
     		inverseJoinColumns=@JoinColumn(name="test_question_id", referencedColumnName="test_question_id"))

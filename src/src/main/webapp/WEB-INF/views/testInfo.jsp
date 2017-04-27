@@ -1,0 +1,47 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page session="false"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<html>
+<head>
+<title>Student Test Page</title>
+
+<!-- PAGE LEVEL STYLES -->
+<link rel="stylesheet" href="../resources/css/bootstrap.css" />
+<link rel="stylesheet" href="../resources/css/login.css" />
+<link rel="stylesheet" href="../resources/css/magic.css" />
+<!-- END PAGE LEVEL STYLES -->
+
+</head>
+<body>
+	<h1>Student Test Page Information</h1>
+
+	<!-- PAGE CONTENT -->
+	<h2>Hi ${userModel.firstName} ${userModel.lastName}
+		(${userModel.userName})</h2>
+	<br />
+	<c:if test="${testModel != null}">
+		<form:form action="${pageContext.request.contextPath}/test/start" modelAttribute="testModel" method="GET">
+			<h3>You are having un-completed test in ${testModel.testDate}
+				which test key is ${testModel.testId}. Do you want to continue?</h3>
+			<br />
+			<input type="submit" value="Yes, take me to the test" />
+		</form:form>
+	</c:if>
+
+	<c:if test="${testModel == null}">
+		<form:form action="${pageContext.request.contextPath}/test/selectCatSubcat" modelAttribute="testModel" method="GET">
+			<h3>You are assigned to the test. Click the button below when you are ready.</h3>
+			<br />
+			<input type="submit" value="Yes, take me to the test" />
+		</form:form>
+	</c:if>
+
+	<!--END PAGE CONTENT -->
+
+	<!-- PAGE LEVEL SCRIPTS -->
+
+
+	<!--END PAGE LEVEL SCRIPTS -->
+</body>
+</html>

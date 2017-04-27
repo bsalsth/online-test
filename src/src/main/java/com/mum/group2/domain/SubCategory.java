@@ -12,6 +12,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 @Entity (name = "sub_category")
 public class SubCategory {
 	@Id	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -20,7 +23,8 @@ public class SubCategory {
 	
 	private String description;
 	
-	@OneToMany(fetch=FetchType.LAZY)
+	@Fetch(FetchMode.SELECT)
+	@OneToMany(fetch=FetchType.EAGER)
 	@JoinTable(name="question_subcat",
     		joinColumns=@JoinColumn(name="sub_cat_id", referencedColumnName="sub_cat_id"),
     		inverseJoinColumns=@JoinColumn(name="question_id", referencedColumnName="question_id"))

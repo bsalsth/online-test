@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.mum.group2.domain.Test;
 import com.mum.group2.domain.User;
 import com.mum.group2.repositories.UserRepository;
 import com.mum.group2.services.UserService;
@@ -27,4 +28,10 @@ public class UserServiceImpl implements UserService {
 	public List<User> findAll() {
 		return (List<User>)userRepository.findAll();
 	}
+
+//	@Override
+//	public Test getTestByID(int testID) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
  }

@@ -14,6 +14,9 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 @Entity
 public class User {
 	@Id	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -34,13 +37,15 @@ public class User {
 	private String lastName;
 	private String email;
 
-	@ManyToMany(fetch=FetchType.LAZY)
+	@Fetch(FetchMode.SELECT)
+	@ManyToMany(fetch=FetchType.EAGER)
 	@JoinTable(name="user_role",
 		    joinColumns=@JoinColumn(name="user_id", referencedColumnName="user_id"),
 		    inverseJoinColumns=@JoinColumn(name="role_id", referencedColumnName="role_id"))
 	private Collection<Role> roleCollection;	
 	
-	@OneToMany(fetch=FetchType.LAZY)
+	@Fetch(FetchMode.SELECT)
+	@OneToMany(fetch=FetchType.EAGER)
 	@JoinTable(name="user_test",
     		joinColumns=@JoinColumn(name="user_id", referencedColumnName="user_id"),
     		inverseJoinColumns=@JoinColumn(name="test_id", referencedColumnName="test_id"))
@@ -143,5 +148,13 @@ public class User {
 		this.testCollection = testCollection;
 	}
 	
-	
+	public Test getTestFromTestID(int testID) {
+		for (Test t : testCollection) {
+			if (t.getTestId() == testID) {
+				return t;
+			}
+		}
+		
+		return null;
+	}
 }

@@ -17,7 +17,7 @@
 	<h1>Welcome to Student Test Page</h1>
 
 	<P>The time on the server is ${serverTime}.</P>
-
+<!-- 
 	<table border=1>
 		<tr>
 			<td>Session Key</td>
@@ -30,15 +30,16 @@
 			</tr>
 		</c:forEach>
 	</table>
-
+-->
 	<!-- PAGE CONTENT -->
 	<div class="tab-content">
 		<div id="login" class="tab-pane active">
-			<form:form modelAttribute="testModel" method="POST">
+			<form:form action="${pageContext.request.contextPath}/test/testStatus" modelAttribute="userTestModel">
 				<p class="text-muted text-center btn-block btn btn-primary btn-rect">
 					Enter your Student ID and Test ID</p>
-				<input type="text" placeholder="Student ID" class="form-control" /> 
-				<input type="text" placeholder="Test ID" class="form-control" />
+					
+				<form:input type="text" path="userId" placeholder="Student ID" class="form-control"/>
+				<form:input type="text" path="testId" placeholder="Test ID" class="form-control"/>
 				<br/>
 				<button class="btn text-muted text-center btn-danger" type="submit">Sign in</button>
 			</form:form>

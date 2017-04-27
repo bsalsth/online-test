@@ -9,7 +9,7 @@ import com.mum.group2.domain.Test;
 
 @Repository
 public interface TestRepository extends CrudRepository<Test,Integer>{
-//	@Query("select t from Test  t where t.user_id = :studentID and t.test_id = :testId")
+//	@Query("select t from Test  t, User u where u.user_id = :studentID and tu.test_id = :testId and t.test_id = :testId")
 //	public Test findTestWithStudentIDTestID(@Param("studentID") int studentID, @Param("testId") int testID);
 }
 

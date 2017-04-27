@@ -9,5 +9,5 @@ public interface TestService {
 	public Test get(int id);
 	public List<Test> findAll();
 	
-	public Test findTestWithStudentIDTestID(int studentID, int testID);
+//	public Test findTestWithStudentIDTestID(int studentID, int testID);
 }

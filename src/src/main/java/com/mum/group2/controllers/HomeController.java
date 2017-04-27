@@ -1,4 +1,4 @@
-package com.mum.group2;
+package com.mum.group2.controllers;
 
 import java.text.DateFormat;
 import java.util.Date;
@@ -39,13 +39,12 @@ public class HomeController {
 
 		model.addAttribute("serverTime", formattedDate);
 		// "username", "password", "first_name", "last_name", "email"
-		User user = new User("Minh", "password", "first_name", "last_name", "email");
+		User user = new User("Govinda", "password", "first_name", "last_name", "email");
 //		usi.save(user);
 //		
 //		System.out.println("Save a user");
 		
 		model.addAttribute("userModel", usi.findAll());
-		model.addAttribute("userModelTmp", new User());
 		return "home";
 	}
 

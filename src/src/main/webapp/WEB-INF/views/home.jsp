@@ -14,18 +14,14 @@
 <P>  The time on the server is ${serverTime}. </P>
 
 
-<form:form modelAttribute="userModelTmp" method="POST" enctype="multipart/form-data">
 	<table border=1>
 		<c:forEach items="${userModel}" var="user">
 			<tr>
 				<td>${user.userName} ${user.email} </td>
 			</tr>
 		</c:forEach>
-		<tr>
-			<td><form:input id="productImage" path="email" type="file"/></td>
-		</tr>
 	</table>
-</form:form>
 
+	<a href="./test">Student Test Front Page</a>
 </body>
 </html>

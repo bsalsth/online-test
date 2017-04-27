@@ -5,7 +5,9 @@ import java.util.List;
 import com.mum.group2.domain.Test;
 
 public interface TestService {
-	public Test save(Test member);
+	public Test save(Test test);
 	public Test get(int id);
 	public List<Test> findAll();
+	
+	public Test findTestWithStudentIDTestID(int studentID, int testID);
 }

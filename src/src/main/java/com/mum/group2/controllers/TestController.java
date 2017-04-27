@@ -57,8 +57,15 @@ public class TestController {
 
 		return "testSelectCatSubcat";
 	}
+	
 	@RequestMapping(value = "/start", method = RequestMethod.GET)
 	public String startTest(Model model) {
+		
+		return "testStart";
+	}
+	
+	@RequestMapping(value = "/start", method = RequestMethod.POST)
+	public String startNewTest(Model model) {
 		
 		return "testStart";
 	}

@@ -23,5 +23,7 @@
 	</table>
 
 	<a href="./test">Student Test Front Page</a>
+	
+	<a href="./user">Sign Up</a>
 </body>
 </html>

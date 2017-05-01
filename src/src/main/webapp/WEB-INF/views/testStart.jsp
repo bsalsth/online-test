@@ -7,6 +7,8 @@
 <title>Testing</title>
 </head>
 <body>
-	Tada, you have reached to start your test page.
+	<br/>
+	<br/>
+	<h1>Tada, you have reached to your test page.</h1>
 </body>
 </html>

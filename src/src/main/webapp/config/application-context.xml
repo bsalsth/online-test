@@ -32,12 +32,20 @@
  			</props>
 		</property>
 	</bean>
-
+	<!-- Local DB
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url" value="jdbc:mysql://localhost:3306/otcs" />
 		<property name="username" value="root" />
 		<property name="password" value="pass1234" />
+	</bean>
+	-->
+	
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://54.236.21.54:3306/otcs" />
+		<property name="username" value="otcs" />
+		<property name="password" value="otcs" />
 	</bean>
 
 

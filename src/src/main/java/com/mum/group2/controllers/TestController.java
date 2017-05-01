@@ -1,5 +1,9 @@
 package com.mum.group2.controllers;
 
+import java.util.List;
+
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,13 +12,20 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mum.group2.Utils;
+import com.mum.group2.bean.SelectCatSubcat;
 import com.mum.group2.bean.UserTest;
+import com.mum.group2.domain.Category;
 import com.mum.group2.domain.Test;
 import com.mum.group2.domain.User;
+import com.mum.group2.services.CategoryService;
 import com.mum.group2.services.TestService;
 import com.mum.group2.services.UserService;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 /**
  * Handles requests for the application home page.
@@ -31,12 +42,14 @@ public class TestController {
 	@Autowired
 	UserService us;
 	
+	@Autowired
+	CategoryService cs;
+	
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public String showStudentLogin(Model model) {
 		Utils.serverTime(model);
 		
-//		model.addAttribute("testModel", ts.findAll());
 		model.addAttribute("userTestModel", new UserTest());
 		return "testFrontPage";
 	}
@@ -55,8 +68,23 @@ public class TestController {
 	@RequestMapping(value = "/selectCatSubcat", method = RequestMethod.GET)
 	public String selectCatSubcat(Model model) {
 
+		List<Category> listCat = cs.findAllCategories();
+		JSONArray jsonObject = JSONArray.fromObject( listCat );
+		model.addAttribute("categories", listCat);
+		model.addAttribute("categoriesJSON", jsonObject);
+		model.addAttribute("selectCatSubcat", new SelectCatSubcat());
 		return "testSelectCatSubcat";
 	}
+	
+	@RequestMapping(value = "/selectCatSubcat", method = RequestMethod.POST)
+	public String startATest(@Valid @ModelAttribute("selectCatSubcat") SelectCatSubcat selectCatSubcat, RedirectAttributes redirectAttributes) {
+
+		//@TODO: save information about the test to DB
+			
+		//redirect to start a test page
+		redirectAttributes.addFlashAttribute("selectCatSubcat", selectCatSubcat);
+		return "redirect:/test/start";
+	}	
 	
 	@RequestMapping(value = "/start", method = RequestMethod.GET)
 	public String startTest(Model model) {

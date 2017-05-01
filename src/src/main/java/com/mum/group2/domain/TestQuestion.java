@@ -8,26 +8,28 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
-@Entity
-public class Test_Question {
+@Entity (name = "Test_Question")
+public class TestQuestion {
 	@Id	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="test_question_id")
 	private int testQuestionId;
 	
 	private int answer;
+
+	private boolean result;
 	
 	@OneToOne
 	@JoinColumn(name="question_id")
 	private Question question;
 
-	public Test_Question(int testQuestionId, int answer, Question question) {
+	public TestQuestion(int testQuestionId, int answer, Question question) {
 		super();
 		this.testQuestionId = testQuestionId;
 		this.answer = answer;
 		this.question = question;
 	}
 
-	public Test_Question() {
+	public TestQuestion() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -56,5 +58,13 @@ public class Test_Question {
 		this.question = question;
 	}
 
+	public boolean isResult() {
+		return result;
+	}
 
+	public void setResult(boolean result) {
+		this.result = result;
+	}
+
+	
 }

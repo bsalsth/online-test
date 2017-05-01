@@ -20,7 +20,7 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
-	public void saveOrUpdateResource(Category category) {
+	public void saveOrUpdateCategory(Category category) {
 		categoryRepository.save(category);
 	}
 

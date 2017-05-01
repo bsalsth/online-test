@@ -25,7 +25,7 @@ public class SubCategory {
 	
 	@Fetch(FetchMode.SELECT)
 	@OneToMany(fetch=FetchType.EAGER)
-	@JoinTable(name="question_subcat",
+	@JoinTable(name="QUESTION_SUBCAT",
     		joinColumns=@JoinColumn(name="sub_cat_id", referencedColumnName="sub_cat_id"),
     		inverseJoinColumns=@JoinColumn(name="question_id", referencedColumnName="question_id"))
 	private Collection<Question> questionCollection;

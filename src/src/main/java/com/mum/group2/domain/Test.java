@@ -16,7 +16,7 @@ import javax.persistence.OneToMany;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
-@Entity
+@Entity (name = "test")
 public class Test {
 	@Id	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="test_id")
@@ -30,7 +30,7 @@ public class Test {
 
 	@Fetch(FetchMode.SELECT)
 	@OneToMany(fetch=FetchType.EAGER)
-	@JoinTable(name="test_testquestion",
+	@JoinTable(name="TEST_TESTQUESTION",
     		joinColumns=@JoinColumn(name="test_id", referencedColumnName="test_id"),
     		inverseJoinColumns=@JoinColumn(name="test_question_id", referencedColumnName="test_question_id"))
 	private Collection<TestQuestion> testQuestionCollection;

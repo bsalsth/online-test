@@ -1,7 +1,10 @@
 package com.mum.group2.domain;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,11 +13,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity 
 @Table (name = "sub_category")
@@ -31,6 +37,14 @@ public class SubCategory {
     		joinColumns=@JoinColumn(name="sub_cat_id", referencedColumnName="sub_cat_id"),
     		inverseJoinColumns=@JoinColumn(name="question_id", referencedColumnName="question_id"))
 	private Collection<Question> questionCollection;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="CAT_ID")
+	private Category category;
+	
+	@OneToMany(mappedBy = "subcategory", cascade = CascadeType.ALL)
+	@LazyCollection(LazyCollectionOption.FALSE)
+	private List<Question> questions = new ArrayList<Question>();
 
 	public int getSubCatId() {
 		return subCatId;
@@ -63,6 +77,30 @@ public class SubCategory {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
+	public List<Question> getQuestions() {
+		return questions;
+	}
+
+	public void setQuestions(List<Question> questions) {
+		this.questions = questions;
+	}
+
+	public boolean equals(SubCategory subcategory) {
+		return subCatId == subcategory.getSubCatId();
+	}
+	
+	public int hashCode() {
+		return subCatId;
 	}
 	
 }

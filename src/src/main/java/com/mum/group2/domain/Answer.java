@@ -2,10 +2,12 @@ package com.mum.group2.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity (name = "answer")
 public class Answer {
@@ -17,6 +19,10 @@ public class Answer {
 	
 	@Column(name="right_answer")
 	private Boolean isRightAnswer;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="QUESTION_ID")
+	private Question question;
 
 	public Answer() {
 		super();
@@ -57,5 +63,12 @@ public class Answer {
 		}
 	}
 	
+	public Question getQuestion() {
+		return question;
+	}
+
+	public void setQuestion(Question question) {
+		this.question = question;
+	}
 	
 }

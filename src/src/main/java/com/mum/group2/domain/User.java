@@ -1,6 +1,9 @@
 package com.mum.group2.domain;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,6 +19,7 @@ import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+ 
 
 @Entity (name = "user")
 public class User {
@@ -42,7 +46,9 @@ public class User {
 	@JoinTable(name="USER_ROLE",
 		    joinColumns=@JoinColumn(name="user_id", referencedColumnName="user_id"),
 		    inverseJoinColumns=@JoinColumn(name="role_id", referencedColumnName="role_id"))
-	private Collection<Role> roleCollection;	
+	private Set<Role> roles = new HashSet<Role>();	
+	
+	
 	
 	@Fetch(FetchMode.SELECT)
 	@OneToMany(fetch=FetchType.LAZY)
@@ -53,6 +59,7 @@ public class User {
 	
 	public User() {
 		super();
+		
 	}
 
 	
@@ -129,13 +136,16 @@ public class User {
 	}
 
 
-	public Collection<Role> getRoleCollection() {
-		return roleCollection;
+	
+
+
+	public Set<Role> getRoles() {
+		return roles;
 	}
 
 
-	public void setRoleCollection(Collection<Role> roleCollection) {
-		this.roleCollection = roleCollection;
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
 	}
 
 

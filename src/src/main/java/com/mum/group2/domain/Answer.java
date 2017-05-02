@@ -7,7 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 
-@Entity
+@Entity (name = "answer")
 public class Answer {
 	@Id	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="answer_id")
@@ -15,7 +15,7 @@ public class Answer {
 	
 	private String description;
 	
-	@JoinColumn(name="right_answer")
+	@Column(name="right_answer")
 	private boolean isRightAnswer;
 
 	public Answer() {

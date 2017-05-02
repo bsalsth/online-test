@@ -21,7 +21,7 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
  
 
-@Entity
+@Entity (name = "user")
 public class User {
 	@Id	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="user_id")
@@ -43,7 +43,7 @@ public class User {
 
 	@Fetch(FetchMode.SELECT)
 	@ManyToMany(fetch=FetchType.EAGER)
-	@JoinTable(name="user_role",
+	@JoinTable(name="USER_ROLE",
 		    joinColumns=@JoinColumn(name="user_id", referencedColumnName="user_id"),
 		    inverseJoinColumns=@JoinColumn(name="role_id", referencedColumnName="role_id"))
 	private Set<Role> roles = new HashSet<Role>();	
@@ -52,7 +52,7 @@ public class User {
 	
 	@Fetch(FetchMode.SELECT)
 	@OneToMany(fetch=FetchType.EAGER)
-	@JoinTable(name="user_test",
+	@JoinTable(name="USER_TEST",
     		joinColumns=@JoinColumn(name="user_id", referencedColumnName="user_id"),
     		inverseJoinColumns=@JoinColumn(name="test_id", referencedColumnName="test_id"))
 	private Collection<Test> testCollection;

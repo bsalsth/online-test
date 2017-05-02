@@ -15,7 +15,7 @@ import javax.persistence.OneToMany;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
-@Entity
+@Entity (name = "category")
 public class Category {
 	@Id	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="cat_id")
@@ -25,7 +25,7 @@ public class Category {
 
 	@Fetch(FetchMode.SELECT)
 	@OneToMany(fetch=FetchType.EAGER)
-	@JoinTable(name="cat_subcat",
+	@JoinTable(name="CAT_SUBCAT",
     		joinColumns=@JoinColumn(name="cat_id", referencedColumnName="cat_id"),
     		inverseJoinColumns=@JoinColumn(name="sub_cat_id", referencedColumnName="sub_cat_id"))
 	private Collection<SubCategory> subCatCollection;	
@@ -34,18 +34,19 @@ public class Category {
 		super();
 	}
 
+	public int getCatId() {
+		return catId;
+	}
+
+	public void setCatId(int catId) {
+		this.catId = catId;
+	}
+
 	public Category(String description) {
 		super();
 		this.description = description;
 	}
 
-	public int getCategoryId() {
-		return catId;
-	}
-
-	public void setCategoryId(int catId) {
-		this.catId = catId;
-	}
 
 	public String getDescription() {
 		return description;

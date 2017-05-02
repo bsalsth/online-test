@@ -6,7 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Entity
+@Entity (name = "role")
 public class Role {
 	@Id	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="role_id")

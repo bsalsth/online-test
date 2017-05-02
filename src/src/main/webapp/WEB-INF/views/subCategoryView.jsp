@@ -4,14 +4,15 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <html>
 <head>
-<title>Category List</title>
+<title>SubCategory List</title>
 </head>
 <body>
-	<h1>Category List</h1>
+	<h1>SubCategory List</h1>
 	<table>
 		<tr>
 			<th>Id</th>
 			<th>Name</th>
+			<th>Category</th>
 		</tr>
 		<c:forEach var="category" items="${list}">
 			<tr>

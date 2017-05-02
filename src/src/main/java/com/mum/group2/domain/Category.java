@@ -34,18 +34,19 @@ public class Category {
 		super();
 	}
 
+	public int getCatId() {
+		return catId;
+	}
+
+	public void setCatId(int catId) {
+		this.catId = catId;
+	}
+
 	public Category(String description) {
 		super();
 		this.description = description;
 	}
 
-	public int getCategoryId() {
-		return catId;
-	}
-
-	public void setCategoryId(int catId) {
-		this.catId = catId;
-	}
 
 	public String getDescription() {
 		return description;

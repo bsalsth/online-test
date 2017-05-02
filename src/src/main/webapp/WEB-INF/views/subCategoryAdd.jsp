@@ -1,12 +1,24 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<h1>Add Category</h1>
+<h1>Add SubCategory</h1>
 <form:form method="post"
-	action="${pageContext.request.contextPath}/category/saveCategory">
+	action="${pageContext.request.contextPath}/subCategory/saveSubCategory">
 	<table>
 		<tr>
-			<td>Name :</td>
+
+			<td>Category :</td>
+
+
+			<td><form:select path="description">
+
+					<form:option value="" label="...." />
+
+					<form:options items="${categoryList}" />
+
+				</form:select></td>
+
+			<td>SubCategory :</td>
 			<td><form:input path="description" /></td>
 		</tr>
 

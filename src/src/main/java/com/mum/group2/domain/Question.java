@@ -24,7 +24,7 @@ public class Question {
 	private String description;
 
 	@Fetch(FetchMode.SELECT)
-	@OneToMany(fetch=FetchType.EAGER)
+	@OneToMany(fetch=FetchType.LAZY)
 	@JoinTable(name="QUESTION_ANSWER",
     		joinColumns=@JoinColumn(name="question_id", referencedColumnName="question_id"),
     		inverseJoinColumns=@JoinColumn(name="answer_id", referencedColumnName="answer_id"))

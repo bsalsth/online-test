@@ -1,5 +1,8 @@
 package com.mum.group2.controllers;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -18,14 +21,16 @@ import com.mum.group2.Utils;
 import com.mum.group2.bean.SelectCatSubcat;
 import com.mum.group2.bean.UserTest;
 import com.mum.group2.domain.Category;
+import com.mum.group2.domain.Question;
+import com.mum.group2.domain.SubCategory;
 import com.mum.group2.domain.Test;
 import com.mum.group2.domain.User;
 import com.mum.group2.services.CategoryService;
+import com.mum.group2.services.SubCategoryService;
 import com.mum.group2.services.TestService;
 import com.mum.group2.services.UserService;
 
 import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
 
 /**
  * Handles requests for the application home page.
@@ -44,6 +49,9 @@ public class TestController {
 	
 	@Autowired
 	CategoryService cs;
+	
+	@Autowired
+	SubCategoryService scs;
 	
 	
 	@RequestMapping(method = RequestMethod.GET)
@@ -82,6 +90,13 @@ public class TestController {
 		//@TODO: save information about the test to DB
 			
 		//redirect to start a test page
+		
+//		SubCategory sce = scs.getSubCategoryById(1);
+//		Collection<Question> listQuestions = sce.getQuestionCollection();
+//		List<Question> list = new ArrayList<Question>(listQuestions);	
+//		Collections.shuffle(list);
+		
+		List<Question> listS = scs.getFirst5Q(11);
 		redirectAttributes.addFlashAttribute("selectCatSubcat", selectCatSubcat);
 		return "redirect:/test/start";
 	}	

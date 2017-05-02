@@ -9,7 +9,7 @@ public interface CategoryService {
 	
 	public void saveOrUpdateCategory(Category category);
 	
-	public Category getCategoryById(int categoryId);
+	public Category getCategoryById(int catId);
 
-	public void deleteCategory(int categoryId) ;
+	public void deleteCategory(int catId) ;
 }

@@ -14,31 +14,17 @@
 var categories = eval('('+'${categoriesJSON}'+')');
 
 $(document).ready(function() {
-    var subCat = {
-		<c:forEach items="${categories}" var="category">
-				'${category.categoryId}' : [{
-    				<c:forEach items="${category.subCatCollection}" var="subcat">
-    				'${subcat.subCategoryId}':'${subcat.description}',
-    				</c:forEach>
-				}],
-    	</c:forEach>
-    }
-
     $('#catId').on('change',function() {
-		subCat1 = categories[$(this).val()-1].subCatCollection
-		innerText = ""
-    	$.each(subCat[$(this).val()], function( key, value ) {
-    		$.each(value, function( key1, value1 ) {
-    			innerText += '<input type="checkbox" name="subCatId" value="' + key1 + '"/>' + value1 + '<br/>';
-    		})
-    	})			
-		
-		$('#subCatCheckBox').html(innerText
-//            subCat[$(this).val()].map(function() { 
-//            		return '<input type="checkbox" name="subCat" value="' + this.id + '"/>' + this.key + '<br/>' 
-//            	})
-
-        );
+    	if ($(this).val() != 0) {
+			listSubCat = categories[$(this).val()-1].subCatCollection
+			$('#subCatCheckBox').html(
+		    	listSubCat.map(function(subCat) {
+		    		return '<input type="checkbox" name="subCat" value="' + subCat["subCatId"] + '"/>' + subCat["description"] + '<br/>'
+		    	})				
+			);
+    	} else {
+    		$('#subCatCheckBox').html("");
+    	}
     });
 });
 </script>
@@ -51,10 +37,11 @@ $(document).ready(function() {
 		<h3>Category :</h3>
 	<form:select type="text" path="catId">
 		<form:option value="0">--------Select Category------</form:option>
-		<form:options items="${categories}" itemLabel="description"	itemValue="categoryId" />
+		<form:options items="${categories}" itemLabel="description"	itemValue="catId" />
 	</form:select>
 	<div id="subCatCheckBox"></div>
  	<br/>
+ 	<!-- 
  	<h3>Test data from DB</h3>
  	<table>
 	<c:forEach items="${categories}" var="category">
@@ -68,6 +55,7 @@ $(document).ready(function() {
 		</tr>
 	</c:forEach>
 	</table>
+	-->
 		<h3>I'm done for selecting Category and Subcategory for the test.
 			Send me to the test questions page.</h3>
 		<br />

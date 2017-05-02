@@ -29,7 +29,7 @@ public class Test {
 	private Date testDate;
 
 	@Fetch(FetchMode.SELECT)
-	@OneToMany(fetch=FetchType.EAGER)
+	@OneToMany(fetch=FetchType.LAZY)
 	@JoinTable(name="TEST_TESTQUESTION",
     		joinColumns=@JoinColumn(name="test_id", referencedColumnName="test_id"),
     		inverseJoinColumns=@JoinColumn(name="test_question_id", referencedColumnName="test_question_id"))

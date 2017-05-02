@@ -1,8 +1,5 @@
 package com.mum.group2.controllers;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -22,7 +19,6 @@ import com.mum.group2.bean.SelectCatSubcat;
 import com.mum.group2.bean.UserTest;
 import com.mum.group2.domain.Category;
 import com.mum.group2.domain.Question;
-import com.mum.group2.domain.SubCategory;
 import com.mum.group2.domain.Test;
 import com.mum.group2.domain.User;
 import com.mum.group2.services.CategoryService;

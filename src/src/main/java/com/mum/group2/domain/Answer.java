@@ -16,7 +16,7 @@ public class Answer {
 	private String description;
 	
 	@Column(name="right_answer")
-	private boolean isRightAnswer;
+	private Boolean isRightAnswer;
 
 	public Answer() {
 		super();
@@ -45,12 +45,16 @@ public class Answer {
 		this.description = description;
 	}
 
-	public boolean isRightAnswer() {
+	public Boolean isRightAnswer() {
 		return isRightAnswer;
 	}
 
-	public void setRightAnswer(boolean isRightAnswer) {
-		this.isRightAnswer = isRightAnswer;
+	public void setRightAnswer(Boolean isRightAnswer) {
+		if (isRightAnswer == null) {
+			isRightAnswer = new Boolean(false);
+		} else {
+			this.isRightAnswer = isRightAnswer;
+		}
 	}
 	
 	

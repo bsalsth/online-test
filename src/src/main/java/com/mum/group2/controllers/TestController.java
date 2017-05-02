@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mum.group2.Utils;
+import com.mum.group2.bean.BeanCategory;
 import com.mum.group2.bean.SelectCatSubcat;
 import com.mum.group2.bean.UserTest;
 import com.mum.group2.domain.Category;
@@ -72,10 +73,14 @@ public class TestController {
 	@RequestMapping(value = "/selectCatSubcat", method = RequestMethod.GET)
 	public String selectCatSubcat(Model model) {
 
-		List<Category> listCat = cs.findAllCategories();
-		JSONArray jsonObject = JSONArray.fromObject( listCat );
-		model.addAttribute("categories", listCat);
-		model.addAttribute("categoriesJSON", jsonObject);
+//		List<Category> listCat = cs.findAllCategories();
+//		JSONArray jsonObject = JSONArray.fromObject( listCat );
+//		model.addAttribute("categories", listCat);
+//		model.addAttribute("categoriesJSON", jsonObject);
+		
+		List<BeanCategory> categoriesModel = cs.getAllCategories();
+		model.addAttribute("categoriesModel", categoriesModel);
+		model.addAttribute("categoriesJSON", JSONArray.fromObject(categoriesModel));
 		model.addAttribute("selectCatSubcat", new SelectCatSubcat());
 		return "testSelectCatSubcat";
 	}

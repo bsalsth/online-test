@@ -37,7 +37,7 @@ $(document).ready(function() {
 		<h3>Category :</h3>
 	<form:select type="text" path="catId">
 		<form:option value="0">--------Select Category------</form:option>
-		<form:options items="${categories}" itemLabel="description"	itemValue="catId" />
+		<form:options items="${categoriesModel}" itemLabel="description"	itemValue="catId" />
 	</form:select>
 	<div id="subCatCheckBox"></div>
  	<br/>

@@ -24,7 +24,7 @@ public class Category {
 	private String description;
 
 	@Fetch(FetchMode.SELECT)
-	@OneToMany(fetch=FetchType.EAGER)
+	@OneToMany(fetch=FetchType.LAZY)
 	@JoinTable(name="CAT_SUBCAT",
     		joinColumns=@JoinColumn(name="cat_id", referencedColumnName="cat_id"),
     		inverseJoinColumns=@JoinColumn(name="sub_cat_id", referencedColumnName="sub_cat_id"))

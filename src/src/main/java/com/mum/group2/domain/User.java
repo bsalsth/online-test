@@ -42,7 +42,7 @@ public class User {
 	private String email;
 
 	@Fetch(FetchMode.SELECT)
-	@ManyToMany(fetch=FetchType.EAGER)
+	@ManyToMany(fetch=FetchType.LAZY)
 	@JoinTable(name="USER_ROLE",
 		    joinColumns=@JoinColumn(name="user_id", referencedColumnName="user_id"),
 		    inverseJoinColumns=@JoinColumn(name="role_id", referencedColumnName="role_id"))
@@ -51,7 +51,7 @@ public class User {
 	
 	
 	@Fetch(FetchMode.SELECT)
-	@OneToMany(fetch=FetchType.EAGER)
+	@OneToMany(fetch=FetchType.LAZY)
 	@JoinTable(name="USER_TEST",
     		joinColumns=@JoinColumn(name="user_id", referencedColumnName="user_id"),
     		inverseJoinColumns=@JoinColumn(name="test_id", referencedColumnName="test_id"))

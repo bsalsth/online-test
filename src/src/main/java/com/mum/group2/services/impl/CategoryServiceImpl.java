@@ -25,13 +25,13 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
-	public Category getCategoryById(int categoryId) {
-		return categoryRepository.findOne(Integer.valueOf(categoryId));
+	public Category getCategoryById(int catId) {
+		return categoryRepository.findOne(Integer.valueOf(catId));
 	}
 
 	@Override
-	public void deleteCategory(int categoryId) {
-		categoryRepository.delete(Integer.valueOf(categoryId));
+	public void deleteCategory(int catId) {
+		categoryRepository.delete(Integer.valueOf(catId));
 	}
 
 }

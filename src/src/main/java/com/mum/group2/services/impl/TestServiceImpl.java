@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mum.group2.domain.Test;
+import com.mum.group2.domain.User;
 import com.mum.group2.repositories.TestRepository;
 import com.mum.group2.services.TestService;
 
@@ -32,4 +33,10 @@ public class TestServiceImpl implements TestService {
 //	public Test findTestWithStudentIDTestID(int studentID, int testID) {
 //		return testRepository.findTestWithStudentIDTestID(studentID, testID);
 //	}
+	
+	@Override
+	public Test findByUserAndSessionKey(User user, String sessionKey) {
+		return testRepository.findByUserAndSessionKey(user, sessionKey);
+	}
+	
  }

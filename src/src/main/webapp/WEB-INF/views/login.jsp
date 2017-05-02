@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
 <!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
@@ -15,9 +15,9 @@
         <![endif]-->
     <!-- GLOBAL STYLES -->
      <!-- PAGE LEVEL STYLES -->
-     <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.css" />
-    <link rel="stylesheet" href="assets/css/login.css" />
-    <link rel="stylesheet" href="assets/plugins/magic/magic.css" />
+     <link rel="stylesheet" href="resources/css/bootstrap.css" />
+    <link rel="stylesheet" href="resources/css/login.css" />
+    <link rel="stylesheet" href="resources/css/magic.css" />
      <!-- END PAGE LEVEL STYLES -->
    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -33,7 +33,7 @@
    <!-- PAGE CONTENT --> 
     <div class="container">
     <div class="text-center">
-        <img style="width: 180px; height: 150px;" src="assets/img/mum.png" id="logoimg" alt=" Logo" />
+        <img style="width: 180px; height: 150px;" src="resources/img/mum.png" id="logoimg" alt=" Logo" />
     </div>
     <div class="tab-content">
         <div id="login" class="tab-pane active">
@@ -56,7 +56,7 @@
         </div>
      <div class="text-center">
         <ul class="list-inline">
-            <li><a class="text-muted" href="#login" data-toggle="tab">Login</a></li>
+           <!--  <li><a class="text-muted" href="#login" data-toggle="tab">Login</a></li> -->
             <li><a class="text-muted" href="#forgot" data-toggle="tab">Forgot Password</a></li>
         </ul>
     </div>
@@ -67,8 +67,8 @@
 	  <!--END PAGE CONTENT -->     
 	      
       <!-- PAGE LEVEL SCRIPTS -->
-      <script src="assets/plugins/jquery-2.0.3.min.js"></script>
-      <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+      <script src="resources/js/jquery-2.0.3.min.js"></script>
+      <script src="resources/js/bootstrap.min.js"></script>
    <script src="assets/js/login.js"></script>
       <!--END PAGE LEVEL SCRIPTS -->
 

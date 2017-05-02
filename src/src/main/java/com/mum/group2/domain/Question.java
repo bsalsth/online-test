@@ -30,6 +30,10 @@ public class Question {
     		inverseJoinColumns=@JoinColumn(name="answer_id", referencedColumnName="answer_id"))
 	private Collection<Answer> answerCollection;	
 	
+	private boolean isActive;
+
+	private boolean isUsed;
+	
 	
 	public Question() {
 		super();
@@ -62,6 +66,22 @@ public class Question {
 
 	public void setAnswerCollection(Collection<Answer> answerCollection) {
 		this.answerCollection = answerCollection;
+	}
+
+	public boolean isActive() {
+		return isActive;
+	}
+
+	public void setActive(boolean isActive) {
+		this.isActive = isActive;
+	}
+
+	public boolean isUsed() {
+		return isUsed;
+	}
+
+	public void setUsed(boolean isUsed) {
+		this.isUsed = isUsed;
 	}
 	
 	

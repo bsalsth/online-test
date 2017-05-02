@@ -25,5 +25,7 @@
 	<a href="./test">Student Test Front Page</a>
 	
 	<a href="./user">Sign Up</a>
+	
+	<a href="./login">Log in</a>
 </body>
 </html>

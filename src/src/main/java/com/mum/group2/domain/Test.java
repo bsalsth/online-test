@@ -33,7 +33,7 @@ public class Test {
 	@JoinTable(name="test_testquestion",
     		joinColumns=@JoinColumn(name="test_id", referencedColumnName="test_id"),
     		inverseJoinColumns=@JoinColumn(name="test_question_id", referencedColumnName="test_question_id"))
-	private Collection<Test_Question> testQuestionCollection;
+	private Collection<TestQuestion> testQuestionCollection;
 	
 	public Test() {
 		super();

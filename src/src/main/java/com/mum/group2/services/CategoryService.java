@@ -7,7 +7,7 @@ import com.mum.group2.domain.Category;
 public interface CategoryService {
 	public List<Category> findAllCategories();
 	
-	public void saveOrUpdateResource(Category category);
+	public void saveOrUpdateCategory(Category category);
 	
 	public Category getCategoryById(int categoryId);
 

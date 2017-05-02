@@ -70,4 +70,20 @@ public class Category {
 		this.subCatCollection = subCatCollection;
 	}
 	
+	public List<SubCategory> getSubcategories() {
+		return subcategories;
+	}
+
+	public void setSubcategories(List<SubCategory> subcategories) {
+		this.subcategories = subcategories;
+	}
+	
+	public boolean equals(Category category) {
+		return catId == category.getCatId();
+	}
+	
+	public int hashCode() {
+		return catId;
+	}
+	
 }

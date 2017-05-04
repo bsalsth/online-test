@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.mum.group2.domain.Category;
 import com.mum.group2.domain.SubCategory;
@@ -44,10 +45,11 @@ public class ReportController {
 	
 	@SuppressWarnings("unchecked")
 	@RequestMapping(method = RequestMethod.GET)
-	public String generateReport(Model model) {
+	public String generateReport(Model model, @RequestParam(value = "userId", required = true) String userId,
+			 @RequestParam(value = "sessionKey", required = true) String sessionKey) {
 		
-		User user = usi.get(Integer.parseInt("2"));
-		Test test = testService.findByUserAndSessionKey(user, "abcde");
+		User user = usi.get(Integer.parseInt(userId));
+		Test test = testService.findByUserAndSessionKey(user, sessionKey);
 		
 		Map<Category,LinkedHashMap<SubCategory,LinkedHashMap<String,String>>> map = new LinkedHashMap<Category,LinkedHashMap<SubCategory,LinkedHashMap<String,String>>>();
 		int prevSubcategoryId = -1;

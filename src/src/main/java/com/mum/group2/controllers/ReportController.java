@@ -2,6 +2,7 @@ package com.mum.group2.controllers;
 
 import java.text.NumberFormat;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -136,6 +137,22 @@ public class ReportController {
 		}
 		
 		return categoryScoreMap;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public String showList(Locale locale, Model model) {
+		
+		User user = usi.get(Integer.parseInt("2"));
+		List<Test> tests = testService.findByUser(user);
+		
+		JSONObject json = new JSONObject();
+		json.put("user", user);
+		json.put("list", tests);
+		
+		model.addAttribute("test", json);
+		
+		return "reports";
 	}
 
 }

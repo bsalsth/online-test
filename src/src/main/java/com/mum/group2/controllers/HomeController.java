@@ -89,10 +89,10 @@ public class HomeController {
 	}
 	
 
-	@RequestMapping(value = "/reportsDemo", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/reportsDemo", method = RequestMethod.GET)
 	public String repDemo(){
 		return "reports";
-	}
+	}*/
 	
 	@RequestMapping(value = "/reportDetailDemo", method = RequestMethod.GET)
 	public String repDM(){

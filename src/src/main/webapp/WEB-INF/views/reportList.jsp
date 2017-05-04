@@ -1,3 +1,6 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 
 <!-- BEGIN BODY -->
@@ -33,18 +36,22 @@
 										<thead>
 											<tr>
 												<th>Id</th>
-												<th>Name</th>
+												<th>First Name</th>
+												<th>Last Name</th>
 												<th>Test Date</th>
 												<th>View</th>
 											</tr>
 										</thead>
 										<tbody>
+										    <c:forEach items="${test.list}" var="test">
 											<tr class="odd gradeX">
 												<td>${test.user.userId}</td>
-												<td>${test.user.firstName} ${test.user.lastName}</td>
-												<td class="center">Java</i> </a></td>
-												<td><a href="reportDetailDemo"><i class="icon-eye-open"></i></a></td>
+												<td>${test.user.firstName}</td>
+												<td>${test.user.lastName}</td>
+												<td><fmt:formatDate pattern="yyyy-MM-dd" value="${test.testDate}"/></td>
+												<td><a href="${pageContext.request.contextPath}/report"><i class="icon-eye-open"></i></a></td>
 											</tr>
+											</c:forEach>
 										</tbody>
 									</table>
 								</div>

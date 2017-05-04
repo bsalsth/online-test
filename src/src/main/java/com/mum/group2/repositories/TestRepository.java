@@ -15,7 +15,7 @@ public interface TestRepository extends CrudRepository<Test,Integer>{
 	
 	public Test findByUserAndSessionKey(User user, String sessionKey);
 	
-	public List<Test> findByUser(User user);
+	public List<Test> findByUserOrderByTestDateDesc(User user);
 	
 }
 

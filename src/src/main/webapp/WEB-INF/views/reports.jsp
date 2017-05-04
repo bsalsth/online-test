@@ -34,36 +34,17 @@
 											<tr>
 												<th>Id</th>
 												<th>Name</th>
-												<th>Test</th>
+												<th>Test Date</th>
 												<th>View</th>
-												<th>Delete</th>
 											</tr>
 										</thead>
 										<tbody>
 											<tr class="odd gradeX">
-												<td>1</td>
-
-												<td>Hacky Tack</td>
+												<td>${test.user.userId}</td>
+												<td>${test.user.firstName} ${test.user.lastName}</td>
 												<td class="center">Java</i> </a></td>
 												<td><a href="reportDetailDemo"><i class="icon-eye-open"></i></a></td>
-												<td class="center"><a class="center" href="#question3">
-														<i class="icon-remove"></i>
-												</a></td>
-
 											</tr>
-
-											<tr class="odd gradeX">
-												<td>1</td>
-
-												<td>Hacky Tack</td>
-												<td class="center">Java</i> </a></td>
-												<td><a href="reportDetailDemo"><i class="icon-eye-open"></i></a></td>
-												<td class="center"><a class="center" href="#question3">
-														<i class="icon-remove"></i>
-												</a></td>
-
-											</tr>
-
 										</tbody>
 									</table>
 								</div>
@@ -88,13 +69,13 @@
 	<!--END FOOTER -->
 
 	<!-- GLOBAL SCRIPTS -->
-	<script src="resources/plugins/jquery-2.0.3.min.js"></script>
-	<script src="resources/plugins/bootstrap/js/bootstrap.min.js"></script>
-	<script src="resources/plugins/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/plugins/jquery-2.0.3.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/plugins/bootstrap/js/bootstrap.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/plugins/modernizr-2.6.2-respond-1.1.0.min.js"></script>
 	<!-- END GLOBAL SCRIPTS -->
 	<!-- PAGE LEVEL SCRIPTS -->
-	<script src="resources/plugins/dataTables/jquery.dataTables.js"></script>
-	<script src="resources/plugins/dataTables/dataTables.bootstrap.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/plugins/dataTables/jquery.dataTables.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/plugins/dataTables/dataTables.bootstrap.js"></script>
 	<script>
 		$(document).ready(function() {
 			$('#dataTables-example').dataTable();

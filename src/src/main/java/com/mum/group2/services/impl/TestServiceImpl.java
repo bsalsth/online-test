@@ -41,7 +41,7 @@ public class TestServiceImpl implements TestService {
 	
 	@Override
 	public List<Test> findByUser(User user) {
-		return testRepository.findByUser(user);
+		return testRepository.findByUserOrderByTestDateDesc(user);
 	}
 	
  }

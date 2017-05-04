@@ -3,7 +3,6 @@ package com.mum.group2.controllers;
 import java.text.NumberFormat;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 import org.json.simple.JSONObject;
@@ -45,7 +44,7 @@ public class ReportController {
 	
 	@SuppressWarnings("unchecked")
 	@RequestMapping(method = RequestMethod.GET)
-	public String generateReport(Locale locale, Model model) {
+	public String generateReport(Model model) {
 		
 		User user = usi.get(Integer.parseInt("2"));
 		Test test = testService.findByUserAndSessionKey(user, "abcde");
@@ -141,13 +140,11 @@ public class ReportController {
 	
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public String showList(Locale locale, Model model) {
+	public String showList(Model model) {
 		
-		User user = usi.get(Integer.parseInt("2"));
-		List<Test> tests = testService.findByUser(user);
+		List<Test> tests = testService.getAllOrderByTestDate();
 		
 		JSONObject json = new JSONObject();
-		json.put("user", user);
 		json.put("list", tests);
 		
 		model.addAttribute("test", json);

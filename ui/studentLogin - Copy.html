@@ -1,0 +1,174 @@
+﻿<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+
+<!-- BEGIN HEAD -->
+<head>
+     <meta charset="UTF-8" />
+    <title>MUM ADMIN</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+	<meta content="" name="description" />
+	<meta content="" name="author" />
+     <!--[if IE]>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <![endif]-->
+    <!-- GLOBAL STYLES -->
+     <!-- PAGE LEVEL STYLES -->
+     <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="assets/css/login.css" />
+    <link rel="stylesheet" href="assets/plugins/magic/magic.css" />
+     <!-- END PAGE LEVEL STYLES -->
+   <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+</head>
+    <!-- END HEAD -->
+
+    <!-- BEGIN BODY -->
+<body >
+
+   <!-- PAGE CONTENT --> 
+    <div class="container">
+    <div class="text-center">
+        <img style="width: 180px; height: 150px;" src="assets/img/mum.png" id="logoimg" alt=" Logo" />
+    </div>
+    <div class="tab-content">
+        <div id="login" class="tab-pane active">
+   <form id="surveyForm" method="post" class="form-horizontal">
+    <div class="form-group">
+        <label class="col-xs-3 control-label">Question</label>
+        <div class="col-xs-5">
+            <input type="text" class="form-control" name="question" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-xs-3 control-label">Options</label>
+        <div class="col-xs-5">
+            <input type="text" class="form-control" name="option[]" />
+        </div>
+        <div class="col-xs-4">
+            <button type="button" class="btn btn-default addButton"><i class="fa fa-plus"></i></button>
+        </div>
+    </div>
+
+    <!-- The option field template containing an option field and a Remove button -->
+    <div class="form-group hide" id="optionTemplate">
+        <div class="col-xs-offset-3 col-xs-5">
+            <input class="form-control" type="text" name="option[]" />
+        </div>
+        <div class="col-xs-4">
+            <button type="button" class="btn btn-default removeButton"><i class="fa fa-minus"></i></button>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-xs-5 col-xs-offset-3">
+            <button type="submit" class="btn btn-default">Validate</button>
+        </div>
+    </div>
+</form>
+        </div>
+</div>
+
+   <a id="add_row" class="btn btn-default pull-left">Add Row</a><a id='delete_row' class="pull-right btn btn-default">Delete Row</a>
+
+	  <!--END PAGE CONTENT -->     
+	      
+      <!-- PAGE LEVEL SCRIPTS -->
+      <script src="assets/plugins/jquery-2.0.3.min.js"></script>
+      <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+   <script src="assets/js/login.js"></script>
+      <!--END PAGE LEVEL SCRIPTS -->
+
+
+<script>
+$(document).ready(function() {
+    // The maximum number of options
+    var MAX_OPTIONS = 5;
+
+    $('#surveyForm')
+        .formValidation({
+            framework: 'bootstrap',
+            icon: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                question: {
+                    validators: {
+                        notEmpty: {
+                            message: 'The question required and cannot be empty'
+                        }
+                    }
+                },
+                'option[]': {
+                    validators: {
+                        notEmpty: {
+                            message: 'The option required and cannot be empty'
+                        },
+                        stringLength: {
+                            max: 100,
+                            message: 'The option must be less than 100 characters long'
+                        }
+                    }
+                }
+            }
+        })
+
+        // Add button click handler
+        .on('click', '.addButton', function() {
+            var $template = $('#optionTemplate'),
+                $clone    = $template
+                                .clone()
+                                .removeClass('hide')
+                                .removeAttr('id')
+                                .insertBefore($template),
+                $option   = $clone.find('[name="option[]"]');
+
+            // Add new field
+            $('#surveyForm').formValidation('addField', $option);
+        })
+
+        // Remove button click handler
+        .on('click', '.removeButton', function() {
+            var $row    = $(this).parents('.form-group'),
+                $option = $row.find('[name="option[]"]');
+
+            // Remove element containing the option
+            $row.remove();
+
+            // Remove field
+            $('#surveyForm').formValidation('removeField', $option);
+        })
+
+        // Called after adding new field
+        .on('added.field.fv', function(e, data) {
+            // data.field   --> The field name
+            // data.element --> The new field element
+            // data.options --> The new field options
+
+            if (data.field === 'option[]') {
+                if ($('#surveyForm').find(':visible[name="option[]"]').length >= MAX_OPTIONS) {
+                    $('#surveyForm').find('.addButton').attr('disabled', 'disabled');
+                }
+            }
+        })
+
+        // Called after removing the field
+        .on('removed.field.fv', function(e, data) {
+           if (data.field === 'option[]') {
+                if ($('#surveyForm').find(':visible[name="option[]"]').length < MAX_OPTIONS) {
+                    $('#surveyForm').find('.addButton').removeAttr('disabled');
+                }
+            }
+        });
+});
+</script>
+</body>
+    <!-- END BODY -->
+</html>

@@ -14,4 +14,6 @@ public interface TestService {
 	
 	public Test findByUserAndSessionKey(User user, String sessionKey);
 	
+	public List<Test> findByUser(User user);
+	
 }

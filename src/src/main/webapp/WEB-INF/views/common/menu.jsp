@@ -73,7 +73,7 @@
 						class="icon-angle-right"></i> Add Question </a></li>
 			</ul></li>
 		<!-- reports -->
-		<li class="panel"><a href="report/list"> <i
+		<li class="panel"><a href="${pageContext.request.contextPath}/report/list"> <i
 				class="icon-folder-open-alt"></i> Reports
 		</a></li>
 		<!-- test menu -->

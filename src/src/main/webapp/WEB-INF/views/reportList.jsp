@@ -49,7 +49,7 @@
 												<td>${test.user.firstName}</td>
 												<td>${test.user.lastName}</td>
 												<td><fmt:formatDate pattern="yyyy-MM-dd" value="${test.testDate}"/></td>
-												<td><a href="${pageContext.request.contextPath}/report"><i class="icon-eye-open"></i></a></td>
+												<td><a href="${pageContext.request.contextPath}/report?userId=${test.user.userId}&sessionKey=${test.sessionKey}"><i class="icon-eye-open"></i></a></td>
 											</tr>
 											</c:forEach>
 										</tbody>

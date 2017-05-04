@@ -152,7 +152,7 @@ public class ReportController {
 		
 		model.addAttribute("test", json);
 		
-		return "reports";
+		return "reportList";
 	}
 
 }

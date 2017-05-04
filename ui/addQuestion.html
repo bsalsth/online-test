@@ -1,0 +1,323 @@
+﻿<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+
+ <!-- BEGIN HEAD -->
+<head>
+     <meta charset="UTF-8" />
+    <title>BCORE Admin Dashboard Template | Coach</title>
+     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+     <!--[if IE]>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <![endif]-->
+    <!-- GLOBAL STYLES -->
+    <!-- GLOBAL STYLES -->
+    <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <link rel="stylesheet" href="assets/css/theme.css" />
+    <link rel="stylesheet" href="assets/css/MoneAdmin.css" />
+    <link rel="stylesheet" href="assets/plugins/Font-Awesome/css/font-awesome.css" />
+    <!--END GLOBAL STYLES -->
+     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+
+</head>
+    <!-- END HEAD -->
+    <!-- BEGIN BODY -->
+<body class="padTop53 " >
+
+   
+     <!-- MAIN WRAPPER -->
+    <div id="wrap">
+
+
+        <!-- HEADER SECTION -->
+        <div id="top">
+
+            <nav class="navbar navbar-inverse navbar-fixed-top " style="padding-top: 10px;">
+                <a data-original-title="Show/Hide Menu" data-placement="bottom" data-tooltip="tooltip" class="accordion-toggle btn btn-primary btn-sm visible-xs" data-toggle="collapse" href="#menu" id="menu-toggle">
+                    <i class="icon-align-justify"></i>
+                </a>
+                <!-- LOGO SECTION -->
+                <header class="navbar-header">
+
+                    <a href="index.html" class="navbar-brand">
+                    <img style="width: 50px; height: 40px;" src="assets/img/mum.png" alt="" />
+                        
+                        </a>
+                </header>
+                <!-- END LOGO SECTION -->
+                <ul class="nav navbar-top-links navbar-right">
+
+                    <!--ADMIN SETTINGS SECTIONS -->
+
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="icon-user "></i>&nbsp; <i class="icon-chevron-down "></i>
+                        </a>
+
+                        <ul class="dropdown-menu dropdown-user">
+                            <li><a href="#"><i class="icon-user"></i> User Profile </a>
+                            </li>
+                            <li><a href="#"><i class="icon-gear"></i> Settings </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li><a href="login.html"><i class="icon-signout"></i> Logout </a>
+                            </li>
+                        </ul>
+
+                    </li>
+                    <!--END ADMIN SETTINGS -->
+                </ul>
+
+            </nav>
+
+        </div>
+        <!-- END HEADER SECTION -->
+
+
+
+        <!-- MENU SECTION -->
+       <div id="left" >
+            <div class="media user-media well-small">
+                <a class="user-link" href="#">
+                    <img class="media-object img-thumbnail user-img" alt="User Picture" src="assets/img/user.gif" />
+                </a>
+                <br />
+                <div class="media-body">
+                    <h5 class="media-heading"> Joe Romlin</h5>
+                
+                </div>
+                <br />
+            </div>
+
+            <ul id="menu" class="collapse">
+
+                
+                <li class="panel active">
+                    <a href="index.html" >
+                        <i class="icon-table"></i> Dashboard
+                    </a>                   
+                </li>
+
+<!-- // COACH MENU -->
+        <li class="panel">
+              <a href="#" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#coach-menu">
+                  <i class="icon-user"></i> 
+                        Coach
+                        <span class="pull-right">
+                            <i class="icon-angle-left"></i>
+                        </span>
+                          &nbsp; <span class="label label-warning">5</span>&nbsp;
+                    </a>
+                    <ul class="collapse" id="coach-menu">
+                        <li><a href="#"><i class="icon-angle-right"></i> List Coach </a></li>
+                        <li><a href="#"><i class="icon-angle-right"></i> Add Coach </a></li>
+                    </ul>
+                </li>
+<!-- // STUDENTS MENU -->
+        <li class="panel">
+              <a href="#" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#students-menu">
+                  <i class="icon-user"></i> 
+                        Student
+                        <span class="pull-right">
+                            <i class="icon-angle-left"></i>
+                        </span>
+                          &nbsp; <span class="label label-warning">5</span>&nbsp;
+                    </a>
+                    <ul class="collapse" id="students-menu">
+                        <li><a href="#"><i class="icon-angle-right"></i> List Students </a></li>
+                        <li><a href="#"><i class="icon-angle-right"></i> Add Student </a></li>
+                    </ul>
+                </li>
+<!-- // Data Entry MENU -->
+        <li class="panel">
+              <a href="#" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#manager-menu">
+                  <i class="icon-user"></i> 
+                        Data Manager
+                        <span class="pull-right">
+                            <i class="icon-angle-left"></i>
+                        </span>
+                          &nbsp; <span class="label label-warning">5</span>&nbsp;
+                    </a>
+                    <ul class="collapse" id="manager-menu">
+                        <li><a href="#"><i class="icon-angle-right"></i> List Data Manager </a></li>
+                        <li><a href="#"><i class="icon-angle-right"></i> Add Data Manager </a></li>
+                    </ul>
+                </li>
+<!-- test menu -->
+       <li class="panel">
+                   <a href="test_result.html" >
+                        <i class="icon-folder-open-alt"></i> Test Page
+                    </a>                   
+                </li>
+
+                <li><a href="login.html"><i class="icon-signin"></i> Login  </a></li>
+
+            </ul>
+
+        </div>
+        <!--END MENU SECTION -->
+
+
+
+
+        <!--PAGE CONTENT -->
+        <div id="content">
+           
+                <div class="inner">
+                     <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Grid </h1>
+                </div>
+            </div> 
+                    
+                    
+                       
+<div class="row">
+    <div class="col-lg-12">
+    <div class="box dark">
+        <header>
+            <div class="icons"><i class="icon-edit"></i></div>
+            <h5>Edit User</h5>
+            <div class="toolbar">
+                <ul class="nav">
+                    <li><a href="#">Link</a></li>
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <i class="icon-th-large"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Demo Link</a></li>
+                            <li><a href="#">Demo Link</a></li>
+                            <li><a href="#">Demo Link</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="accordion-toggle minimize-box" data-toggle="collapse" href="#div-1">
+                            <i class="icon-chevron-up"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </header>
+        <div id="div-1" class="accordion-body collapse in body">
+            <form class="form-horizontal">
+
+                               <div class="form-group">    
+                                        <label  class="control-label col-lg-4">Select Category</label>
+                                        <div class="col-lg-8">
+                                            <select class="form-control">
+                                                <option value="1">Java</option>
+                                                <option>Dot Net</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                             <div class="form-group">    
+                                        <label  class="control-label col-lg-4">Select Sub Category</label>
+                                        <div class="col-lg-8">
+                                            <select class="form-control">
+                                                <option value="1">J2EE</option>
+                                                <option>Dot Net</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+
+                       <div class="form-group">
+                             <label for="text1" class="control-label col-lg-4">Question</label>
+                             <div class="col-lg-8">
+                            <textarea class="form-control"  rows=""></textarea>
+
+                    </div>
+                    </div>
+
+
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">1.
+                            <input type="radio" name = "answer" value="" />
+
+                    </label>
+
+                    <div class="col-lg-8">
+                        <input type="text" id="text1" placeholder="Option" class="form-control" />
+                    </div>
+                </div>
+
+                   <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">2.
+                            <input type="radio" name = "answer" value="" />
+
+
+                    </label>
+
+                    <div class="col-lg-8">
+                        <input type="text" id="text1" placeholder="Option" class="form-control" />
+                    </div>
+                </div>
+
+                   <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">3.
+                            <input type="radio" name = "answer" value="" />
+
+                    </label>
+
+                    <div class="col-lg-8">
+                        <input type="text" id="text1" placeholder="Option" class="form-control" />
+                    </div>
+                </div>
+
+                   <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">4.
+                            <input type="radio" name = "answer" value="" />
+
+                    </label>
+
+                    <div class="col-lg-8">
+                        <input type="text" id="text1" placeholder="Option" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group pull-right">
+                    <div class="col-lg-8">
+                         <a href="#" class="btn btn-primary">Add</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>  
+</div>
+
+                    </div>              
+                </div>
+           <!--END PAGE CONTENT -->
+
+
+    </div>
+
+     <!--END MAIN WRAPPER -->
+
+   <!-- FOOTER -->
+    <div id="footer">
+        <p>&copy;  binarytheme &nbsp;2014 &nbsp;</p>
+    </div>
+    <!--END FOOTER -->
+
+
+     <!-- GLOBAL SCRIPTS -->
+    <script src="assets/plugins/jquery-2.0.3.min.js"></script>
+     <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/plugins/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+    <!-- END GLOBAL SCRIPTS -->
+     
+</body>
+    <!-- END BODY -->
+</html>

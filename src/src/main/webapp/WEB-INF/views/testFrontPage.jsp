@@ -32,17 +32,19 @@
 	</table>
 -->
 	<!-- PAGE CONTENT -->
-	<div class="tab-content">
-		<div id="login" class="tab-pane active">
-			<form:form action="${pageContext.request.contextPath}/test/testStatus" modelAttribute="userTestModel">
-				<p class="text-muted text-center btn-block btn btn-primary btn-rect">
-					Enter your Student ID and Test ID</p>
-					
-				<form:input type="text" path="userId" placeholder="Student ID" class="form-control"/>
-				<form:input type="text" path="testId" placeholder="Test ID" class="form-control"/>
-				<br/>
-				<button class="btn text-muted text-center btn-danger" type="submit">Sign in</button>
-			</form:form>
+	<div class="container">
+		<div class="tab-content">
+			<div id="login" class="tab-pane active">
+				<form:form action="${pageContext.request.contextPath}/test/testStatus" modelAttribute="userTestModel">
+					<p class="text-muted text-center btn-block btn btn-primary btn-rect">
+						Enter your Student ID and Test ID</p>
+						
+					<form:input type="text" path="userId" placeholder="Student ID" class="form-control"/>
+					<form:input type="text" path="testId" placeholder="Test ID" class="form-control"/>
+					<br/>
+					<button class="btn text-muted text-center btn-danger" type="submit">Sign in</button>
+				</form:form>
+			</div>
 		</div>
 	</div>
 

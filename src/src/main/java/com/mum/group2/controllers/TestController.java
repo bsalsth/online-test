@@ -1,6 +1,8 @@
 package com.mum.group2.controllers;
 
+import java.util.Hashtable;
 import java.util.List;
+import java.util.Vector;
 
 import javax.validation.Valid;
 
@@ -10,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -18,8 +21,8 @@ import com.mum.group2.Utils;
 import com.mum.group2.bean.BeanCategory;
 import com.mum.group2.bean.SelectCatSubcat;
 import com.mum.group2.bean.UserTest;
-import com.mum.group2.domain.Category;
 import com.mum.group2.domain.Question;
+import com.mum.group2.domain.SubCategory;
 import com.mum.group2.domain.Test;
 import com.mum.group2.domain.User;
 import com.mum.group2.services.CategoryService;
@@ -50,6 +53,8 @@ public class TestController {
 	@Autowired
 	SubCategoryService scs;
 	
+	private Vector<SubCategory> vListSubCatToTest = new Vector<>();
+	//private Hashtable<Integer, List<Question>> listQuestions = new Hashtable<>();
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public String showStudentLogin(Model model) {
@@ -90,27 +95,37 @@ public class TestController {
 
 		//@TODO: save information about the test to DB
 			
-		//redirect to start a test page
-		
 //		SubCategory sce = scs.getSubCategoryById(1);
 //		Collection<Question> listQuestions = sce.getQuestionCollection();
 //		List<Question> list = new ArrayList<Question>(listQuestions);	
 //		Collections.shuffle(list);
 		
-		List<Question> listS = scs.getFirst5Q(11);
+//		List<Question> listS = scs.getFirst5Q(11);
+		
+		/*
+		 * 1. Get SubCategory list base on student selected in /selectCatSubcat page
+		 * 2. Travel from each SubCategory, select random 20 questions to a list
+		 * 3. Show the first question to student
+		 */
+		int firstQuestion = 1;
+		//redirect to start a test page
 		redirectAttributes.addFlashAttribute("selectCatSubcat", selectCatSubcat);
-		return "redirect:/test/start";
+		return "redirect:/test/start/" + selectCatSubcat.getSubCatId().get(0) + "/" + firstQuestion;
 	}	
 	
-	@RequestMapping(value = "/start", method = RequestMethod.GET)
-	public String startTest(Model model) {
-		
+	@RequestMapping(value = "/start/{subCatId}/{questionId}", method = RequestMethod.GET)
+	public String startTest(@PathVariable("subCatId") int subCatId, @PathVariable("questionId") int questionId, 
+			@ModelAttribute("selectCatSubcat") SelectCatSubcat selectCatSubcat, Model model) {
 		return "testStart";
 	}
 	
-	@RequestMapping(value = "/start", method = RequestMethod.POST)
-	public String startNewTest(Model model) {
-		
+	@RequestMapping(value = "/start/{subCatId}/{questionId}", method = RequestMethod.POST)
+	public String onGoingTest(@PathVariable("subCatId") int subCatId, @PathVariable("questionId") int questionId, 
+			@ModelAttribute("selectCatSubcat") SelectCatSubcat selectCatSubcat, Model model) {
+		/*
+		 * 1. Save the student's answer to DB
+		 * 2. Continue to the next question
+		 */
 		return "testStart";
 	}
 }

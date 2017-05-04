@@ -1,4 +1,5 @@
-/target/
+/target/*
 /.springBeans
 /.project
 /.classPath
+pom.propert

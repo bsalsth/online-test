@@ -1,6 +1,5 @@
 package com.mum.group2.domain;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;

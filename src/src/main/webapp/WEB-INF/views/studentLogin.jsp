@@ -6,7 +6,7 @@
 <!-- BEGIN HEAD -->
 <head>
      <meta charset="UTF-8" />
-    <title>MUM ADMIN</title>
+    <title>MUM Student</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 	<meta content="" name="description" />
 	<meta content="" name="author" />
@@ -39,28 +39,28 @@
         <div id="login" class="tab-pane active">
             <form action="index.html" class="form-signin">
                 <p class="text-muted text-center btn-block btn btn-primary btn-rect">
-                    Enter your username and password
+                    Enter your Name and Access ID
                 </p>
-                <input type="text" placeholder="Username" class="form-control" />
-                <input type="password" placeholder="Password" class="form-control" />
-                <button class="btn text-muted text-center btn-danger" type="submit">Sign in</button>
+                <input type="text" placeholder="Full Name" class="form-control" />
+                <input type="text" placeholder="AccessID" class="form-control" />
+                <button class="btn text-muted text-center btn-danger" type="submit">Submit</button>
             </form>
         </div>
-        <div id="forgot" class="tab-pane">
+       <!--  <div id="forgot" class="tab-pane">
             <form action="index.html" class="form-signin">
                 <p class="text-muted text-center btn-block btn btn-primary btn-rect">Enter your valid e-mail</p>
                 <input type="email"  required="required" placeholder="Your E-mail"  class="form-control" />
                 <br />
                 <button class="btn text-muted text-center btn-success" type="submit">Recover Password</button>
             </form>
-        </div>
-     <div class="text-center">
+        </div> -->
+    <!--  <div class="text-center">
         <ul class="list-inline">
-           <!--  <li><a class="text-muted" href="#login" data-toggle="tab">Login</a></li> -->
+            <li><a class="text-muted" href="#login" data-toggle="tab">Login</a></li>
             <li><a class="text-muted" href="#forgot" data-toggle="tab">Forgot Password</a></li>
         </ul>
     </div>
-
+ -->
 
 </div>
 

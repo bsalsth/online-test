@@ -1,7 +1,10 @@
 package com.mum.group2.domain;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,10 +13,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity (name = "question")
 public class Question {
@@ -34,6 +40,13 @@ public class Question {
 
 	private boolean isUsed;
 	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="SUB_CAT_ID")
+	private SubCategory subcategory;
+	
+	@OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
+	@LazyCollection(LazyCollectionOption.FALSE)
+	private List<Answer> answers = new ArrayList<Answer>();
 	
 	public Question() {
 		super();
@@ -84,5 +97,20 @@ public class Question {
 		this.isUsed = isUsed;
 	}
 	
+	public SubCategory getSubcategory() {
+		return subcategory;
+	}
+
+	public void setSubcategory(SubCategory subcategory) {
+		this.subcategory = subcategory;
+	}
+
+	public List<Answer> getAnswers() {
+		return answers;
+	}
+
+	public void setAnswers(List<Answer> answers) {
+		this.answers = answers;
+	}
 	
 }

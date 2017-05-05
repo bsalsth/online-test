@@ -38,5 +38,8 @@ public class BeanCategory {
 		this.listSubcat = listSubcat;
 	}
 
+	public BeanSubcat getBeanSubcat(int subCatId) {
+		return listSubcat.get(subCatId);
+	}
 	
 }

@@ -1,5 +1,7 @@
 package com.mum.group2.services.impl;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,16 +37,21 @@ public class SubCategoryServiceImpl implements SubCategoryService {
 		subCategoryRepository.delete(Integer.valueOf(subCatId));
 
 	}
+//
+//	@Override
+//	public List<SubCategory> getFirst5Question() {
+//		return subCategoryRepository.getFirst5Question();
+//	}
 
 	@Override
-	public List<SubCategory> getFirst5Question() {
-		return subCategoryRepository.getFirst5Question();
-	}
-
-	@Override
-	public List<Question> getFirst5Q(int subCatId) {
-		// TODO Auto-generated method stub
-		return subCategoryRepository.getFirst5Q(subCatId);
+	public List<Question> getFirstNQuestion(int subCatId, int numQuestion) {
+		SubCategory sc = getSubCategoryById(subCatId);
+		
+		List<Question> collQuestion = new ArrayList<>(sc.getQuestionCollection());
+		Collections.shuffle(collQuestion);
+		return collQuestion.size() > numQuestion ? 
+				collQuestion.subList(0, numQuestion) :
+					collQuestion.subList(0, collQuestion.size());
 	}
 
 }

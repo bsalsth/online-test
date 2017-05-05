@@ -2,7 +2,6 @@ package com.mum.group2.services.impl;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,15 +44,12 @@ public class CategoryServiceImpl implements CategoryService {
 		List<Category> listCat = findAllCategories();
 		
 		ArrayList<BeanCategory> retList = new ArrayList<BeanCategory>();
-		for(Iterator<Category> it = listCat.iterator(); it.hasNext();) {
-			Category cat = it.next();
-			
+		for(Category cat : listCat) {
 			BeanCategory bc = new BeanCategory(cat.getCatId(), cat.getDescription());
 			ArrayList<BeanSubcat> listBeanSubcat = bc.getListSubcat();
 			
 			Collection<SubCategory> listSubcat = cat.getSubCatCollection();
-			for (Iterator<SubCategory> it1 = listSubcat.iterator(); it1.hasNext();) {
-				SubCategory subCat = it1.next();
+			for (SubCategory subCat : listSubcat) {
 				listBeanSubcat.add(new BeanSubcat(subCat.getSubCatId(), subCat.getDescription()));
 			}
 			retList.add(bc);

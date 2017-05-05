@@ -15,6 +15,7 @@ public interface SubCategoryService {
 
 	public void deleteSubCategory(int subCatId);
 
-	public List<SubCategory> getFirst5Question();
-	public List<Question> getFirst5Q(int subCatId);
+//	public List<SubCategory> getFirst5Question();
+	
+	public List<Question> getFirstNQuestion(int subCatId, int numQuestion);
 }

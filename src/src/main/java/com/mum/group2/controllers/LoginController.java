@@ -1,4 +1,4 @@
-package com.mum.group2.controllers;
+ package com.mum.group2.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +16,13 @@ public class LoginController {
 		 
 		model.addAttribute("userForm", new User());
 		return "login";
+	}
+	
+	@RequestMapping(value = "/studentLogin",method = RequestMethod.GET)
+	public String showStudentLogin(Model model) {
+		 
+		model.addAttribute("userForm", new User());
+		return "studentLogin";
 	}
 	
 

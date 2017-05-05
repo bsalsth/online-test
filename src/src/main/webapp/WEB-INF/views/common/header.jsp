@@ -13,17 +13,17 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <![endif]-->
     <!-- GLOBAL STYLES -->
-    <link rel="stylesheet" href="resources/plugins/bootstrap/css/bootstrap.css" />
-    <link rel="stylesheet" href="resources/css/main.css" />
-    <link rel="stylesheet" href="resources/css/theme.css" />
-    <link rel="stylesheet" href="resources/css/MoneAdmin.css" />
-    <link rel="stylesheet" href="resources/plugins/Font-Awesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/plugins/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/theme.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/MoneAdmin.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/plugins/Font-Awesome/css/font-awesome.css" />
     <!--END GLOBAL STYLES -->
 
     <!-- PAGE LEVEL STYLES -->
-    <link href="resources/css/layout2.css" rel="stylesheet" />
-       <link href="resources/plugins/flot/examples/examples.css" rel="stylesheet" />
-       <link rel="stylesheet" href="resources/plugins/timeline/timeline.css" />
+    <link href="${pageContext.request.contextPath}/resources/css/layout2.css" rel="stylesheet" />
+       <link href="${pageContext.request.contextPath}/resources/plugins/flot/examples/examples.css" rel="stylesheet" />
+       <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/plugins/timeline/timeline.css" />
     <!-- END PAGE LEVEL  STYLES -->
      <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>

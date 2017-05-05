@@ -26,6 +26,10 @@
 	
 	<a href="./user">Sign Up</a>
 	
-	<a href="./login">Log in</a>
+	<a href="./login">Login</a>
+	
+	<a href="./studentLogin">Student Login</a>
+	
+	<a href="./coach/sendEmail">SendEmail</a>
 </body>
 </html>

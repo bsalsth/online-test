@@ -1,5 +1,8 @@
 package com.mum.group2.repositories;
 
+import java.util.List;
+
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -12,5 +15,11 @@ public interface TestRepository extends CrudRepository<Test,Integer>{
 //	public Test findTestTestID(@Param("studentID") int studentID, @Param("testId") int testID);
 	
 	public Test findByUserAndSessionKey(User user, String sessionKey);
+	
+	public List<Test> findByUserOrderByTestDateDesc(User user);
+	
+	@Query("select t from test t order by testDate desc")
+	public List<Test> getAllOrderByTestDate();
+	
 }
 

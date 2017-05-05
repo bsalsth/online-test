@@ -1,9 +1,13 @@
 package com.mum.group2.bean;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
+import java.util.Hashtable;
 import java.util.List;
 
-import com.mum.group2.domain.Category;
+import com.mum.group2.domain.Answer;
+import com.mum.group2.domain.Question;
 
 public class SelectCatSubcat {
 	private int testId;
@@ -12,7 +16,20 @@ public class SelectCatSubcat {
 	private Date testDate;
 	private int catId;
 	private List<Integer> subCatId;
+	private Hashtable<Integer, ArrayList<Question>> allQuestion = new Hashtable<>();
 
+	public Hashtable<Integer, ArrayList<Question>> getAllQuestions() {
+		return allQuestion;
+	}
+
+	public ArrayList<Question> getAllQuestionsBySubcat(Integer subCatId) {
+		return allQuestion.get(subCatId);
+	}
+	
+	public Collection<Answer> getAllAnswerBySubcatAndQuestions(Integer subCatId, Integer questionId) {
+		return allQuestion.get(subCatId).get(questionId).getAnswerCollection();
+	}
+	
 	public int getTestId() {
 		return testId;
 	}

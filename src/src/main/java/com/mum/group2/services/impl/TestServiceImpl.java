@@ -39,4 +39,9 @@ public class TestServiceImpl implements TestService {
 		return testRepository.findByUserAndSessionKey(user, sessionKey);
 	}
 	
+	@Override
+	public List<Test> getAllOrderByTestDate() {
+		return testRepository.getAllOrderByTestDate();
+	}
+	
  }

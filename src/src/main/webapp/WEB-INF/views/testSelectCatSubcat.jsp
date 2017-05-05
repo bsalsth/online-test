@@ -16,10 +16,10 @@ var categories = eval('('+'${categoriesJSON}'+')');
 $(document).ready(function() {
     $('#catId').on('change',function() {
     	if ($(this).val() != 0) {
-			listSubCat = categories[$(this).val()-1].subCatCollection
+			listSubCat = categories[$(this).val()-1].listSubcat
 			$('#subCatCheckBox').html(
 		    	listSubCat.map(function(subCat) {
-		    		return '<input type="checkbox" name="subCat" value="' + subCat["subCatId"] + '"/>' + subCat["description"] + '<br/>'
+		    		return '<input type="checkbox" id="subCatId" name="subCatId" value="' + subCat["subCatId"] + '"/>' + subCat["description"] + '<br/>'
 		    	})				
 			);
     	} else {

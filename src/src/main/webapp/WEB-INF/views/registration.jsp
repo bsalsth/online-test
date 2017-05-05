@@ -5,10 +5,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Registration</title>
 
+ 
 <link rel="stylesheet" href="resources/css/bootstrap.css" />
 <link rel="stylesheet" href="resources/css/registration.css" />
+ 
 </head>
 <body>
 
@@ -17,7 +20,7 @@
         <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
         	<div class="panel panel-default">
         		<div class="panel-heading">
-			    		<h3 class="panel-title">Please sign up <small>It's free!</small></h3>
+			    		<h3 class="panel-title">Add User</small></h3>
 			 			</div>
 			 			<div class="panel-body">
 			    		<form:form role="form" action="${pageContext.request.contextPath}/user/registration" modelAttribute="userForm" method="POST">
@@ -50,6 +53,29 @@
 			    				</div>
 			    				 
 			    			</div>
+			    			
+							<div class="form-group">
+                                    <label for="filter">Role</label>
+                                    <select class="form-control">
+                              
+                                        <option value="1">Admin</option>
+                                        <option value="2">Coach</option>
+                                        <option value="3">Database Manager</option>
+                                         
+                                    </select>
+                                  </div>
+							
+							<div class="form-group">
+                                    <label for="filter">Coach</label>
+                                    <select class="form-control">
+                              
+                                        <option value="1">Jose</option>
+                                        <option value="2">Minh</option>
+                                        <option value="3">Govinda</option>
+                                        <option value="4">Bishal</option>
+                                    </select>
+                                  </div>
+
 			    			
 			    			<input type="submit" value="Register" class="btn btn-info btn-block">
 			    		

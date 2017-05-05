@@ -3,7 +3,7 @@
 	<div class="media user-media well-small">
 		<a class="user-link" href="#"> <img
 			class="media-object img-thumbnail user-img" alt="User Picture"
-			src="resources/img/user.gif" />
+			src="${pageContext.request.contextPath}/resources/img/user.gif" />
 		</a> <br />
 		<div class="media-body">
 			<h5 class="media-heading">Joe Romlin</h5>
@@ -73,7 +73,7 @@
 						class="icon-angle-right"></i> Add Question </a></li>
 			</ul></li>
 		<!-- reports -->
-		<li class="panel"><a href="reportsDemo"> <i
+		<li class="panel"><a href="${pageContext.request.contextPath}/report/list"> <i
 				class="icon-folder-open-alt"></i> Reports
 		</a></li>
 		<!-- test menu -->

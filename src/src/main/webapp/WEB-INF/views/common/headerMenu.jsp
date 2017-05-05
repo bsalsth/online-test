@@ -8,7 +8,7 @@
                 <header class="navbar-header">
 
                     <a href="index.html" class="navbar-brand">
-                    <img style="width: 50px; height: 40px;" src="resources/img/mum.png" alt="" />
+                    <img style="width: 50px; height: 40px;" src="${pageContext.request.contextPath}/resources/img/mum.png" alt="" />
                         
                         </a>
                 </header>

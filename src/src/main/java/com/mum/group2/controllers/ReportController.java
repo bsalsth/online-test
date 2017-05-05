@@ -2,7 +2,7 @@ package com.mum.group2.controllers;
 
 import java.text.NumberFormat;
 import java.util.LinkedHashMap;
-import java.util.Locale;
+import java.util.List;
 import java.util.Map;
 
 import org.json.simple.JSONObject;
@@ -13,12 +13,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.mum.group2.domain.Category;
 import com.mum.group2.domain.SubCategory;
 import com.mum.group2.domain.Test;
 import com.mum.group2.domain.TestQuestion;
 import com.mum.group2.domain.User;
+import com.mum.group2.services.GradeService;
 import com.mum.group2.services.TestService;
 import com.mum.group2.services.UserService;
 
@@ -36,18 +38,22 @@ public class ReportController {
 	UserService usi;
 	@Autowired
 	TestService testService;
+	@Autowired
+	GradeService gradeService;
 	
 	private static final String CORRECT = "CORRECT";
 	private static final String INCORRECT = "INCORRECT";
 	private static final String TOTAL = "TOTAL";
 	private static final String PERCENTAGE = "PERCENTAGE";
+	private static final String GRADE = "GRADE";
 	
 	@SuppressWarnings("unchecked")
 	@RequestMapping(method = RequestMethod.GET)
-	public String generateReport(Locale locale, Model model) {
+	public String generateReport(Model model, @RequestParam(value = "userId", required = true) String userId,
+			 @RequestParam(value = "sessionKey", required = true) String sessionKey) {
 		
-		User user = usi.get(Integer.parseInt("2"));
-		Test test = testService.findByUserAndSessionKey(user, "abcde");
+		User user = usi.get(Integer.parseInt(userId));
+		Test test = testService.findByUserAndSessionKey(user, sessionKey);
 		
 		Map<Category,LinkedHashMap<SubCategory,LinkedHashMap<String,String>>> map = new LinkedHashMap<Category,LinkedHashMap<SubCategory,LinkedHashMap<String,String>>>();
 		int prevSubcategoryId = -1;
@@ -75,7 +81,7 @@ public class ReportController {
 				addScore(subcatScoreMap, INCORRECT);
 			}
 			addScore(subcatScoreMap, TOTAL);
-			setPercentage(subcatScoreMap, PERCENTAGE);
+			computeGrade(subcatScoreMap);
 			
 			prevSubcategoryId = subcategory.getSubCatId();
 		}
@@ -95,7 +101,7 @@ public class ReportController {
 		scoreMap.put(CORRECT, String.valueOf(0));
 		scoreMap.put(INCORRECT, String.valueOf(0));
 		scoreMap.put(TOTAL, String.valueOf(0));
-		setPercentage(scoreMap, PERCENTAGE);
+		computeGrade(scoreMap);
 	}
 	
 	private void addScore(Map<String,String> scoreMap, String key) {
@@ -103,11 +109,19 @@ public class ReportController {
 	    scoreMap.put(key, String.valueOf(Integer.parseInt(subcatValue) + 1));
 	}
 	
-	private void setPercentage(Map<String,String> scoreMap, String key) {
+	private void computeGrade(Map<String,String> scoreMap) {
 		Double correct = Double.parseDouble(scoreMap.get(CORRECT));
 		Double total = Double.parseDouble(scoreMap.get(TOTAL));
 		
-		scoreMap.put(key, (NumberFormat.getPercentInstance()).format(correct/total));
+		String percentage = (NumberFormat.getPercentInstance()).format(correct/total);
+		scoreMap.put(PERCENTAGE, percentage);
+		
+		if (total == 0) {
+		    scoreMap.put(GRADE, gradeService.findGrade(0F));
+		} else {
+			scoreMap.put(GRADE, gradeService.findGrade(Float.parseFloat(percentage.substring(0,percentage.length()-1))));
+		}
+		
 	}
 	
 	private Map<String,LinkedHashMap<String,String>> calculateTotal(Map<Category,LinkedHashMap<SubCategory,LinkedHashMap<String,String>>> map) {
@@ -130,12 +144,26 @@ public class ReportController {
 			scoreMap.put(CORRECT, String.valueOf(correct));
 			scoreMap.put(INCORRECT, String.valueOf(incorrect));
 			scoreMap.put(TOTAL, String.valueOf(total));
-			setPercentage(scoreMap, PERCENTAGE);
+			computeGrade(scoreMap);
 			
 			categoryScoreMap.put(category.getDescription(), scoreMap);
 		}
 		
 		return categoryScoreMap;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public String showList(Model model) {
+		
+		List<Test> tests = testService.getAllOrderByTestDate();
+		
+		JSONObject json = new JSONObject();
+		json.put("list", tests);
+		
+		model.addAttribute("test", json);
+		
+		return "reportList";
 	}
 
 }

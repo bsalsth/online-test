@@ -52,8 +52,8 @@ public class ReportController {
 	public String generateReport(Model model, @RequestParam(value = "userId", required = true) String userId,
 			 @RequestParam(value = "sessionKey", required = true) String sessionKey) {
 		
-		User user = usi.get(Integer.parseInt("2"));
-		Test test = testService.findByUserAndSessionKey(user, "abcde");
+		User user = usi.get(Integer.parseInt(userId));
+		Test test = testService.findByUserAndSessionKey(user, sessionKey);
 		
 		Map<Category,LinkedHashMap<SubCategory,LinkedHashMap<String,String>>> map = new LinkedHashMap<Category,LinkedHashMap<SubCategory,LinkedHashMap<String,String>>>();
 		int prevSubcategoryId = -1;

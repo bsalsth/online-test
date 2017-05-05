@@ -25,7 +25,7 @@ import com.mum.group2.services.TestService;
 import com.mum.group2.services.UserService;
 
 /**
- * Handles requests for the application home page.
+ * Handles requests for reports
  */
 @Controller
 @RequestMapping("/report")
@@ -42,7 +42,7 @@ public class ReportController {
 	GradeService gradeService;
 	
 	private static final String CORRECT = "CORRECT";
-	private static final String INCORRECT = "INCORRECT";
+	private static final String WRONG = "WRONG";
 	private static final String TOTAL = "TOTAL";
 	private static final String PERCENTAGE = "PERCENTAGE";
 	private static final String GRADE = "GRADE";
@@ -78,7 +78,7 @@ public class ReportController {
 			if (tq.isResult()) {
 				addScore(subcatScoreMap, CORRECT);
 			} else {
-				addScore(subcatScoreMap, INCORRECT);
+				addScore(subcatScoreMap, WRONG);
 			}
 			addScore(subcatScoreMap, TOTAL);
 			computeGrade(subcatScoreMap);
@@ -99,7 +99,7 @@ public class ReportController {
 	
 	private void initializeScoreMap(Map<String,String> scoreMap) {
 		scoreMap.put(CORRECT, String.valueOf(0));
-		scoreMap.put(INCORRECT, String.valueOf(0));
+		scoreMap.put(WRONG, String.valueOf(0));
 		scoreMap.put(TOTAL, String.valueOf(0));
 		computeGrade(scoreMap);
 	}
@@ -136,13 +136,13 @@ public class ReportController {
 			for (SubCategory subcategory : subcategories.keySet()) {
 				LinkedHashMap<String,String> subcatScoreMap = subcategories.get(subcategory);
 				correct += Integer.parseInt(subcatScoreMap.get(CORRECT));
-				incorrect += Integer.parseInt(subcatScoreMap.get(INCORRECT));
+				incorrect += Integer.parseInt(subcatScoreMap.get(WRONG));
 			    total += Integer.parseInt(subcatScoreMap.get(TOTAL));
 			}
 			
 			LinkedHashMap<String,String> scoreMap = new LinkedHashMap<String,String>();
 			scoreMap.put(CORRECT, String.valueOf(correct));
-			scoreMap.put(INCORRECT, String.valueOf(incorrect));
+			scoreMap.put(WRONG, String.valueOf(incorrect));
 			scoreMap.put(TOTAL, String.valueOf(total));
 			computeGrade(scoreMap);
 			

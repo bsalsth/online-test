@@ -1,6 +1,8 @@
 package com.mum.group2.controllers;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,15 +30,18 @@ public class SubCategoryController {
 	@RequestMapping(value = "/subCategoryForm", method = RequestMethod.GET)
 	public String subCategoryForm(Model model) {
 		model.addAttribute("command", new SubCategory());
-		List<Category> categoryList = categoryService.findAllCategories();
-		model.addAttribute("categoryList", categoryList);
 		return "subCategoryAdd";
 	}
 
-	@ModelAttribute("categoryList")
-	public List<Category> getCategoryList() {
+	@ModelAttribute("categoryMap")
+	public Map<Integer, String> getCategoryMap() {
 		List<Category> list = categoryService.findAllCategories();
-		return list;
+		Map<Integer, String> categoryMap = new HashMap<Integer, String>();
+		for (Category category : list) {
+			categoryMap.put(category.getCatId(), category.getDescription());
+		}
+
+		return categoryMap;
 	}
 
 	/*

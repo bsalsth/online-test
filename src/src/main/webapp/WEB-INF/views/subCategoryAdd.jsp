@@ -10,11 +10,9 @@
 			<td>Category :</td>
 
 
-			<td><form:select path="description">
+			<td><form:select path="category.catId">
 
-					<form:option value="" label="...." />
-
-					<form:options items="${categoryList}" />
+					<form:options items="${categoryMap}" />
 
 				</form:select></td>
 

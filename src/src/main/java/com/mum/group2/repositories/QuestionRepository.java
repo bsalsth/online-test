@@ -8,4 +8,6 @@ import com.mum.group2.domain.Question;
 @Repository
 public interface QuestionRepository extends JpaRepository<Question, Integer> {
 
+	public Question findByDescription(String description);
+	
 }

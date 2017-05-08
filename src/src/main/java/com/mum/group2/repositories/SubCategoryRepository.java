@@ -13,4 +13,7 @@ public interface SubCategoryRepository extends JpaRepository<SubCategory, Intege
 //	//@Query(value = "SELECT q.* FROM question q, sub_category sc, QUESTION_SUBCAT qs where sc.sub_cat_id = :subCatId and q.question_id = qs.question_id and sc.sub_cat_id = qs.sub_cat_id ORDER BY RAND() LIMIT :numQuestionn", nativeQuery = true)
 //	@Query("SELECT q FROM ")
 //	public List<Question> getFirstNQuestion(@Param("subCatId") int subCatId, @Param("numQuestionn") int numQuestionn);
+	
+	public SubCategory findByDescription(String description);
+	
 }

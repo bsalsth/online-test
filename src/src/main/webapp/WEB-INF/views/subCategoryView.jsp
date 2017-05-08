@@ -14,15 +14,16 @@
 			<th>Name</th>
 			<th>Category</th>
 		</tr>
-		<c:forEach var="category" items="${list}">
+		<c:forEach var="subCategory" items="${list}">
 			<tr>
-				<td>${category.catId}</td>
-				<td>${category.description}</td>
+				<td>${subCategory.subCatId}</td>
+				<td>${subCategory.description}</td>
+				<td>${subCategory.category.description}</td>
 			</tr>
 		</c:forEach>
 	</table>
 	<br />
-	<a href="${pageContext.request.contextPath}/category/categoryForm">Add
-		Category</a>
+	<a href="${pageContext.request.contextPath}/subCategory/subCategoryForm">Add
+		SubCategory</a>
 </body>
 </html>

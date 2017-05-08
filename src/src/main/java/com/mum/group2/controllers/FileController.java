@@ -99,7 +99,9 @@ public class FileController {
 	        }
 	        
 		} catch (Exception e) {
-			e.printStackTrace();
+			//e.printStackTrace();
+			model.addAttribute("message", "The questions were not loaded.");
+			
 		} finally {
 			if (workbook != null) {
 				try {
@@ -110,7 +112,11 @@ public class FileController {
 			}
 		}
 		
-		return "index";
+		if (!model.containsAttribute("message")) {
+			model.addAttribute("message", "The questions were successfully loaded.");
+		}
+		
+		return "fileLoadResult";
 	}
 	
 	private Category findOrSaveCategory(String description) {

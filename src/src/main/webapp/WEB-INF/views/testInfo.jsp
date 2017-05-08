@@ -17,23 +17,22 @@
 	<h1>Student Test Page Information</h1>
 
 	<!-- PAGE CONTENT -->
-	<h2>Hi ${userModel.firstName} ${userModel.lastName}
-		(${userModel.userName})</h2>
-	<br />
 	<c:if test="${testModel != null}">
-		<form:form action="${pageContext.request.contextPath}/test/start" modelAttribute="testModel" method="GET">
-			<h3>You are having un-completed test in ${testModel.testDate}
-				which test key is ${testModel.testId}. Do you want to continue?</h3>
+		<h2>Hi ${testModel.user.firstName} ${testModel.user.lastName}
+			(${testModel.user.userName})</h2>
+		<br />
+		<form:form action="${pageContext.request.contextPath}/test/selectCatSubcat" modelAttribute="testModel" method="GET">
+			<h3>You are assigned to the test. Click the button below when you are ready</h3>
 			<br />
 			<input type="submit" value="Yes, take me to the test" />
 		</form:form>
 	</c:if>
 
 	<c:if test="${testModel == null}">
-		<form:form action="${pageContext.request.contextPath}/test/selectCatSubcat" modelAttribute="testModel" method="GET">
-			<h3>You are assigned to the test. Click the button below when you are ready.</h3>
+		<form:form action="${pageContext.request.contextPath}/test" modelAttribute="testModel" method="GET">
+			<h3>Wrong access key!!!</h3>
 			<br />
-			<input type="submit" value="Yes, take me to the test" />
+			<input type="submit" value="Re-enter access key" />
 		</form:form>
 	</c:if>
 

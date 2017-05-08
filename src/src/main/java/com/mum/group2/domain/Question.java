@@ -113,4 +113,12 @@ public class Question {
 		this.answers = answers;
 	}
 	
+	public int getRightAnswerId() {
+		for (Answer a : answerCollection) {
+			if (a.isRightAnswer()) {
+				return a.getAnswerId();
+			}
+		}
+		return 0;
+	}
 }

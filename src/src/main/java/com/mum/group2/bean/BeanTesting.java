@@ -5,10 +5,12 @@ import java.util.List;
 
 import com.mum.group2.domain.Question;
 
-public class BeanTesting extends SelectCatSubcat {
-	private int curSucatPos = 0;
+public class BeanTesting extends BeanSelectCatSubcat {
+	private int curSubcatPos = 0;
+	private int totalSubcat = 0;
 	private int curSubcatId = 0;
 	private String curSubcatName = "";
+	private int totalQuesInCurSubcat = 0;
 
 	private int ans4Ques = 0;
 
@@ -20,6 +22,8 @@ public class BeanTesting extends SelectCatSubcat {
 	private List<BeanCategory> beanCategoriesModel;
 	private Hashtable<Integer, List<Question>> listQuestions4Testing;
 	
+	private Hashtable<Integer, Integer> listResultForTest = new Hashtable<>();
+	
 	public BeanTesting() {
 		super();
 	}
@@ -28,6 +32,7 @@ public class BeanTesting extends SelectCatSubcat {
 		super();
 		this.beanCategoriesModel = beanCategoriesModel;
 		this.listQuestions4Testing = listQuestions4Testing;
+		totalSubcat = listQuestions4Testing.size();
 	}
 
 	public int getCurQuesPos() {
@@ -36,7 +41,13 @@ public class BeanTesting extends SelectCatSubcat {
 
 	public void setCurQuesPos(int currentQuestionPos) {
 		this.curQuesPos = currentQuestionPos;
-		curQues = listQuestions4Testing.get(getCurSubcatId()).get(curQuesPos);
+		List<Question> listQuesOfCurSubcat = listQuestions4Testing.get(curSubcatId);
+		if (listQuesOfCurSubcat.size() != 0) {
+			curQues = listQuesOfCurSubcat.get(curQuesPos);
+		} else {
+			curQues = new Question();
+			curQues.setDescription("Contact Administrator for having the questions for this Subcategory...");
+		}
 	}
 
 	public int getCurSubcatId() {
@@ -55,14 +66,16 @@ public class BeanTesting extends SelectCatSubcat {
 		this.curSubcatName = curSubcatName;
 	}
 
-	public int getCurSucatPos() {
-		return curSucatPos;
+	public int getCurSubcatPos() {
+		return curSubcatPos;
 	}
 
 	public void setCurSubcatPos(int curSucatPos) {
-		this.curSucatPos = curSucatPos;
+		this.curSubcatPos = curSucatPos;
 		
-		setCurSubcatId(getSubCatId().get(getCurSucatPos()));
+		setCurSubcatId(getSubCatId().get(curSubcatPos));
+		
+		totalQuesInCurSubcat = listQuestions4Testing.get(curSubcatId).size();
 		
 		if (beanCategoriesModel == null) {
 			return;
@@ -87,6 +100,22 @@ public class BeanTesting extends SelectCatSubcat {
 
 	public void setAns4Ques(int ans4Ques) {
 		this.ans4Ques = ans4Ques;
+	}
+
+	public int getTotalQuesInCurSubcat() {
+		return totalQuesInCurSubcat;
+	}
+
+	public int getTotalSubcat() {
+		return totalSubcat;
+	}
+
+	public Hashtable<Integer, Integer> getListResultForTest() {
+		return listResultForTest;
+	}
+
+	public void setListResultForTest(Hashtable<Integer, Integer> listResultForTest) {
+		this.listResultForTest = listResultForTest;
 	}
 	
 	

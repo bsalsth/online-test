@@ -41,12 +41,13 @@
 		<div id="wrap">
 			<div class="row">
 				<div class="col-lg-12">
+					<h3>Test part for ${beanTesting.curSubcatName}</h3><i>You still have ${beanTesting.totalSubcat - beanTesting.curSubcatPos - 1} more test part(s).</i>
 					<div class="box">
 						<header>
 							<div class="icons">
 								<i class="icon-th"></i>
 							</div>
-							<h4>${beanTesting.curSubcatName} - Question ${beanTesting.curQuesPos + 1}</h4>
+							<h5>Question ${beanTesting.curQuesPos + 1}/${beanTesting.totalQuesInCurSubcat}</h5>
 
 							<div class="toolbar">
 								<ul class="nav pull-right">

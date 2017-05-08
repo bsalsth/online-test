@@ -3,7 +3,7 @@ package com.mum.group2.bean;
 import java.util.Date;
 import java.util.List;
 
-public class SelectCatSubcat {
+public class BeanSelectCatSubcat {
 	private int testId;
 	private int studentId;
 	private String sessionkey;

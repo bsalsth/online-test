@@ -1,13 +1,8 @@
 package com.mum.group2.repositories;
 
-import java.util.List;
-
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.mum.group2.domain.Question;
 import com.mum.group2.domain.SubCategory;
 
 @Repository

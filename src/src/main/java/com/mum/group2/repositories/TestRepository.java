@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.mum.group2.domain.Test;
@@ -21,5 +22,8 @@ public interface TestRepository extends CrudRepository<Test,Integer>{
 	@Query("select t from test t order by testDate desc")
 	public List<Test> getAllOrderByTestDate();
 	
+	//2017-05-07: MT
+	@Query("select t from test t where session_key = :accessKey")
+	public Test findByAccessKey(@Param("accessKey") String accessKey);
 }
 

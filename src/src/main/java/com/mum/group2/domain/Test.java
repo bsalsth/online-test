@@ -38,7 +38,7 @@ public class Test {
 	@JoinTable(name="TEST_TESTQUESTION",
     		joinColumns=@JoinColumn(name="test_id", referencedColumnName="test_id"),
     		inverseJoinColumns=@JoinColumn(name="test_question_id", referencedColumnName="test_question_id"))
-	private Collection<TestQuestion> testQuestionCollection;
+	private Collection<TestQuestion> testQuestionCollection = new ArrayList<>();
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "USER_ID")
@@ -57,14 +57,22 @@ public class Test {
 		this.testDate = testDate;
 	}
 
-	public String getSessionKey() {
+	public String getAccessKey() {
 		return sessionKey;
 	}
 
+	public void setAccessKey(String accessKey) {
+		this.sessionKey = accessKey;
+	}
+
+	public String getSessionKey() {
+		return sessionKey;
+	}
+	
 	public void setSessionKey(String sessionKey) {
 		this.sessionKey = sessionKey;
 	}
-
+	
 	public Date getTestDate() {
 		return testDate;
 	}
@@ -97,5 +105,14 @@ public class Test {
 	public void setTestQuestions(List<TestQuestion> testQuestions) {
 		this.testQuestions = testQuestions;
 	}
+
+	public Collection<TestQuestion> getTestQuestionCollection() {
+		return testQuestionCollection;
+	}
+
+	public void setTestQuestionCollection(Collection<TestQuestion> testQuestionCollection) {
+		this.testQuestionCollection = testQuestionCollection;
+	}
+	
 	
 }

@@ -9,6 +9,7 @@ public class BeanSelectCatSubcat {
 	private String sessionkey;
 	private Date testDate;
 	private int catId;
+	private String catName;
 	private List<Integer> subCatId;
 	
 	public int getTestId() {
@@ -59,4 +60,13 @@ public class BeanSelectCatSubcat {
 		this.catId = catId;
 	}
 
+	public String getCatName() {
+		return catName;
+	}
+
+	public void setCatName(String catName) {
+		this.catName = catName;
+	}
+
+	
 }

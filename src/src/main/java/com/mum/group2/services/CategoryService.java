@@ -14,7 +14,7 @@ public interface CategoryService {
 
 	public void deleteCategory(int catId) ;
 	
-	public List<BeanCategory> getAllCategories();
+	public List<BeanCategory> getAllCategories(int minimumQuestionPerSubCat);
 	
 	public Category findByDescription(String description);
 	

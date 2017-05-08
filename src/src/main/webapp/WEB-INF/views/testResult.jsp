@@ -26,7 +26,7 @@
 					<div class="col-lg-12">
 						<div class="box">
 							<header>
-								<h5></h5>
+								<h5>Test Result</h5>
 								<div class="toolbar">
 									<span class="label">label</span>
 
@@ -34,33 +34,26 @@
 							</header>
 							<div class="body">
 								<div class="panel panel-success">
-									<div class="panel-heading">
-										<i class="icon-table"></i> Select Category & Sub Category for your test
-									</div>
-									<div class="panel-body">
-										<ul class="chat">
-											<li class="left clearfix">
-												<div class="chat-body clearfix">
-													<div class="header">
-														<ul>
-															<li><strong class="primary-font"> Name: </strong> <strong
-																class="primary-font"> Bishal Shrestha </strong></li>
-															<li><strong class="primary-font"> Category:
-															</strong> <strong class="primary-font"> JAVA </strong></li>
-															<li><strong class="primary-font"> Correct
-																	Answers: </strong> <strong class="primary-font"> 90/100
-															</strong></li>
-														</ul>
-													</div>
-													<br /> <span class="chat-img pull-right"> <strong
-														class="primary-font "> GRADE: &nbsp </strong> <strong
-														class="mg-circle primary-font"> A- </strong>
-													</span> <span class=" primary-font pull-right"> </br>
 
-													</span>
-												</div>
-											</li>
-										</ul>
+									<div class="panel-body">
+
+										<div class="chat-body clearfix">
+											<div class="header">
+												<ul class="chat">
+													<li class="left clearfix"><strong class="primary-font">Student
+															Name: </strong> <strong class="primary-font">${beanTestResult.studentName}</strong></li>
+													<li><strong class="primary-font">Category: </strong> <strong
+														class="primary-font">${beanTestResult.catNameOfTest}</strong></li>
+													<ul>
+														<c:forEach items="${beanTestResult.listGradeForTest}" var="result">
+															<li>
+																<strong class="primary-font">${result.key}: </strong>
+																<strong class="primary-font">${result.value}</strong></li>
+														</c:forEach>
+													</ul>
+												</ul>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -83,9 +76,6 @@
 
 
 	<!-- GLOBAL SCRIPTS -->
-	<script src="resources/plugins/jquery-2.0.3.min.js"></script>
-	<script src="resources/plugins/bootstrap/js/bootstrap.min.js"></script>
-	<script src="resources/plugins/modernizr-2.6.2-respond-1.1.0.min.js"></script>
 	<!-- END GLOBAL SCRIPTS -->
 </body>
 <!-- END BODY -->

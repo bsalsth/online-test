@@ -4,6 +4,7 @@ import java.util.Hashtable;
 import java.util.List;
 
 import com.mum.group2.domain.Question;
+import com.mum.group2.domain.User;
 
 public class BeanTesting extends BeanSelectCatSubcat {
 	private int curSubcatPos = 0;
@@ -11,6 +12,7 @@ public class BeanTesting extends BeanSelectCatSubcat {
 	private int curSubcatId = 0;
 	private String curSubcatName = "";
 	private int totalQuesInCurSubcat = 0;
+	private User student;
 
 	private int ans4Ques = 0;
 
@@ -22,8 +24,6 @@ public class BeanTesting extends BeanSelectCatSubcat {
 	private List<BeanCategory> beanCategoriesModel;
 	private Hashtable<Integer, List<Question>> listQuestions4Testing;
 	
-	private Hashtable<Integer, Integer> listResultForTest = new Hashtable<>();
-	
 	public BeanTesting() {
 		super();
 	}
@@ -33,6 +33,8 @@ public class BeanTesting extends BeanSelectCatSubcat {
 		this.beanCategoriesModel = beanCategoriesModel;
 		this.listQuestions4Testing = listQuestions4Testing;
 		totalSubcat = listQuestions4Testing.size();
+		
+		setCatName(findCatName(getCatId()));
 	}
 
 	public int getCurQuesPos() {
@@ -110,12 +112,45 @@ public class BeanTesting extends BeanSelectCatSubcat {
 		return totalSubcat;
 	}
 
-	public Hashtable<Integer, Integer> getListResultForTest() {
-		return listResultForTest;
+	public User getStudent() {
+		return student;
 	}
 
-	public void setListResultForTest(Hashtable<Integer, Integer> listResultForTest) {
-		this.listResultForTest = listResultForTest;
+	public void setStudent(User student) {
+		this.student = student;
+	}
+	
+	public String findCatName(int catId) {
+		String ret = "";
+		//find out the current Category name
+		if (beanCategoriesModel != null) {
+			for (BeanCategory beanCat : beanCategoriesModel) {
+				if (beanCat.getCatId() == catId) {
+					ret = beanCat.getDescription();
+				}
+			}
+		}
+		
+		return ret;
+	}
+
+	public String findSubcatName(int catId, Integer subCatId) {
+		String ret = "";
+		//find out the current Category name
+		if (beanCategoriesModel != null) {
+			for (BeanCategory beanCat : beanCategoriesModel) {
+				if (beanCat.getCatId() == catId) {
+					for (BeanSubcat beanSubcat : beanCat.getListSubcat()) {
+						if (beanSubcat.getSubCatId() == subCatId) {
+							ret = beanSubcat.getDescription();
+						}
+					}
+						
+				}
+			}
+		}
+		
+		return ret;
 	}
 	
 	

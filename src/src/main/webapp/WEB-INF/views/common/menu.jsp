@@ -77,7 +77,7 @@
 				class="icon-folder-open-alt"></i> Reports
 		</a></li>
 		<li class="panel"><a href="${pageContext.request.contextPath}/file"> <i
-				class="icon-folder-open-alt"></i> Load File
+				class="icon-folder-open-alt"></i> Load File Questions
 		</a></li>
 		<!-- test menu -->
 		<li class="panel"><a href="test_result.html"> <i

@@ -67,13 +67,7 @@ public class FileController {
 	        Iterator<Sheet> sheetIterator = workbook.iterator();
 	        while (sheetIterator.hasNext()) {
 	        	Sheet sheet = sheetIterator.next();
-	        	String sheetName = sheet.getSheetName();
-	        	Category category = categoryService.findByDescription(sheetName);
-	        	if (category == null) {
-	        		category = new Category();
-	        		category.setDescription(sheetName);
-	        		category = categoryService.saveOrUpdateCategory(category);
-	        	}
+	        	Category category = findOrSaveCategory(sheet.getSheetName());
 	        	
 	        	Iterator<Row> rowIterator = sheet.iterator();
 	        	while (rowIterator.hasNext()) {
@@ -89,30 +83,13 @@ public class FileController {
 			        	
 			        	// SUBCATEGORY
 			        	if (i == 0)  {
-			        		subcategory = subcategoryService.findByDescription(cellValue);
-			        		if (subcategory == null) {
-			        			subcategory = new SubCategory();
-			        			subcategory.setCategory(category);
-			        			subcategory.setDescription(cellValue);
-				        		subcategory = subcategoryService.saveOrUpdateSubCategory(subcategory);
-				        	}
+			        		subcategory = findOrSaveSubcategory(category, cellValue);
 			        	// QUESTION
 			        	} else if (i == 1) {
-			        		question = questionService.findByDescription(cellValue);
-			        		if (question == null) {
-			        			question = new Question();
-			        			question.setSubcategory(subcategory);
-			        			question.setDescription(cellValue);
-			        			question = questionService.saveOrUpdateQuestion(question);
-			        		}
+			        		question = findOrSaveQuestion(subcategory, cellValue);
 			            // 2-6 ANSWER
 			        	} else if (i>=2 && i<=6) {
-			        		Answer answer = new Answer();
-			        		answer.setQuestion(question);
-			        		answer.setDescription(cellValue);
-			        		int configurationValue = Integer.parseInt(configurationService.findConfigurationValue(row.getCell(8).getStringCellValue()));
-			        		answer.setRightAnswer(i == configurationValue);
-			        		answerService.saveOrUpdateResource(answer);
+			        		saveAnswer(question, cellValue, row.getCell(8).getStringCellValue(), i);
 			        	} else {
 			        		// do nothing
 			        	}
@@ -134,6 +111,53 @@ public class FileController {
 		}
 		
 		return "index";
+	}
+	
+	private Category findOrSaveCategory(String description) {
+		Category category = categoryService.findByDescription(description);
+		
+    	if (category == null) {
+    		category = new Category();
+    		category.setDescription(description);
+    		category = categoryService.saveOrUpdateCategory(category);
+    	}
+    	
+    	return category;
+	}
+	
+	private SubCategory findOrSaveSubcategory(Category category, String description) {
+		SubCategory subcategory = subcategoryService.findByDescription(description);
+		
+		if (subcategory == null) {
+			subcategory = new SubCategory();
+			subcategory.setCategory(category);
+			subcategory.setDescription(description);
+    		subcategory = subcategoryService.saveOrUpdateSubCategory(subcategory);
+    	}
+		
+		return subcategory;
+	}
+	
+	private Question findOrSaveQuestion(SubCategory subcategory, String description) {
+		Question question = questionService.findByDescription(description);
+		
+		if (question == null) {
+			question = new Question();
+			question.setSubcategory(subcategory);
+			question.setDescription(description);
+			question = questionService.saveOrUpdateQuestion(question);
+		}
+		
+		return question;
+	}
+	
+	private void saveAnswer(Question question, String description, String letterAnswer, int fileColumnIndex) {
+		Answer answer = new Answer();
+		answer.setQuestion(question);
+		answer.setDescription(description);
+		int configurationValue = Integer.parseInt(configurationService.findConfigurationValue(letterAnswer));
+		answer.setRightAnswer(fileColumnIndex == configurationValue);
+		answerService.saveOrUpdateResource(answer);
 	}
 	
 	private File convertToFile(MultipartFile multipartfile) {

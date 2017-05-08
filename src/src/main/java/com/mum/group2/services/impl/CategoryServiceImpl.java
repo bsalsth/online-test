@@ -25,8 +25,8 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
-	public void saveOrUpdateCategory(Category category) {
-		categoryRepository.save(category);
+	public Category saveOrUpdateCategory(Category category) {
+		return categoryRepository.save(category);
 	}
 
 	@Override
@@ -55,6 +55,12 @@ public class CategoryServiceImpl implements CategoryService {
 			retList.add(bc);
 		}
 		return retList;
+	}
+	
+	
+	@Override
+	public Category findByDescription(String description) {
+		return categoryRepository.findByDescription(description);
 	}
 
 }

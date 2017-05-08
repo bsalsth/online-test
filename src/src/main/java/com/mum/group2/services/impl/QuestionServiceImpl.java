@@ -20,8 +20,8 @@ public class QuestionServiceImpl implements QuestionService {
 	}
 
 	@Override
-	public void saveOrUpdateQuestion(Question question) {
-		questionRepository.save(question);
+	public Question saveOrUpdateQuestion(Question question) {
+		return questionRepository.save(question);
 	}
 
 	@Override
@@ -34,4 +34,10 @@ public class QuestionServiceImpl implements QuestionService {
 		questionRepository.delete(Integer.valueOf(questionId));
 	}
 
+	
+	@Override
+	public Question findByDescription(String description) {
+		return questionRepository.findByDescription(description);
+	}
+	
 }

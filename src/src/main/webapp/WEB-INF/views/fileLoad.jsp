@@ -30,18 +30,21 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="panel panel-default">
-                            <div class="panel-heading"><strong class="primary-font">Load File</strong></div>
+                            <div class="panel-heading"><strong class="primary-font">Load File Questions</strong></div>
                             <br><br>
                             
                             <div class="panel-body">
-                            
-                                <div class="header">
-                                    <form method="POST" action="${pageContext.request.contextPath}/file/load" enctype="multipart/form-data">
-                                        <input type="file" name="file" /><br/>
-                                        <input type="submit" value="Submit" />
-                                    </form>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <form role="form" method="POST" action="${pageContext.request.contextPath}/file/load" enctype="multipart/form-data">
+                                            <div class="form-group">
+                                                <label>Please select a file:</label>
+                                                <input type="file" name="file" />
+                                            </div>
+                                            <button type="submit" class="btn btn-default">Submit</button>
+                                        </form>
+                                    </div>
                                 </div>
-                                
                             </div>
                             
                             <br><br>

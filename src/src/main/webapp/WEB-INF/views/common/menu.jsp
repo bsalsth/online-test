@@ -71,13 +71,12 @@
 						List Questions </a></li>
 				<li><a href="addQuestionDemo"><i
 						class="icon-angle-right"></i> Add Question </a></li>
+				<li><a href="${pageContext.request.contextPath}/file"><i
+						class="icon-angle-right"></i> Load File Questions </a></li>
 			</ul></li>
 		<!-- reports -->
 		<li class="panel"><a href="${pageContext.request.contextPath}/report/list"> <i
 				class="icon-folder-open-alt"></i> Reports
-		</a></li>
-		<li class="panel"><a href="${pageContext.request.contextPath}/file"> <i
-				class="icon-folder-open-alt"></i> Load File Questions
 		</a></li>
 		<!-- test menu -->
 		<li class="panel"><a href="test_result.html"> <i

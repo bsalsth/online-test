@@ -254,5 +254,7 @@ public class TestController {
 		}
 		
 		ts.save(aTest);
+		
+		listTestQues4SavingToDB = new ArrayList<>();
 	}
 }

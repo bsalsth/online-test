@@ -39,7 +39,7 @@
                                         <form role="form" method="POST" action="${pageContext.request.contextPath}/file/load" enctype="multipart/form-data">
                                             <div class="form-group">
                                                 <label>Please select a file:</label>
-                                                <input type="file" name="file" />
+                                                <input type="file" name="file" accept=".xls,.xlsx" />
                                             </div>
                                             <button type="submit" class="btn btn-default">Submit</button>
                                         </form>

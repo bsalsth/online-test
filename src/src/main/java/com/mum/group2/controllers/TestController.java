@@ -222,7 +222,7 @@ public class TestController {
 			//Save the student's answer to DB if no more question in current subCat
 			
 			//Have to be called when merging the code
-//			saveStudentTestQuestion();
+			saveStudentTestQuestion();
 			
 			//Go to the next subCat's question if we still have some more left
 			int nextSucatPos = beanTesting.getCurSubcatPos() + 1;
@@ -253,11 +253,11 @@ public class TestController {
 
 		for (TestQuestion tq : listTestQues4SavingToDB) {
 			//old approaching
-			aTest.getTestQuestionCollection().add(tqs.save(tq));
+//			aTest.getTestQuestionCollection().add(tqs.save(tq));
 			
 			//Follow Jose approaching
-//			tq.setTest(aTest);
-//			tqs.save(tq);
+			tq.setTest(aTest);
+			tqs.save(tq);
 			
 			Question q = tq.getQuestion();
 			if (!q.isUsed()) {
@@ -267,6 +267,7 @@ public class TestController {
 		}
 		
 		ts.save(aTest);
+		
 		listTestQues4SavingToDB = new ArrayList<>();
 	}
 }

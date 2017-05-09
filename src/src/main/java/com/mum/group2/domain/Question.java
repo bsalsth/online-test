@@ -118,7 +118,7 @@ public class Question {
 	}
 	
 	public int getRightAnswerId() {
-		for (Answer a : answerCollection) {
+		for (Answer a : getAnswerCollection()) {
 			if (a.isRightAnswer()) {
 				return a.getAnswerId();
 			}

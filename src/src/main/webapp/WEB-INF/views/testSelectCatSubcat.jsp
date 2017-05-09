@@ -10,8 +10,9 @@
 	$(document).ready(
 		function() {
 			$('#catId').on('change', function() {
-				if ($(this).val() != 0) {
-					listSubCat = categories[$(this).val() - 1].listSubcat
+				var selectedIndex = document.getElementById('catId').selectedIndex;
+				if (selectedIndex != 0) {
+					listSubCat = categories[selectedIndex - 1].listSubcat
 					$('#subCatCheckBox').html(
 						listSubCat.map(function(subCat) {
 							return '<input type="checkbox" id="subCatId" name="subCatId" class="panel panel-default" value="' 

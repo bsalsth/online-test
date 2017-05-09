@@ -19,7 +19,7 @@ public interface TestRepository extends CrudRepository<Test,Integer>{
 	
 	public List<Test> findByUserOrderByTestDateDesc(User user);
 	
-	@Query("select t from test t order by testDate desc")
+	@Query("select t from test t where testDate is not null order by testDate desc")
 	public List<Test> getAllOrderByTestDate();
 	
 	//2017-05-07: MT

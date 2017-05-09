@@ -4,7 +4,7 @@
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 
 <script src="../resources/js/jquery-2.0.3.min.js"></script>
-!-- BEGIN BODY -->
+<!-- BEGIN BODY -->
 <body class="padTop53 ">
 
 	<!-- MAIN WRAPPER -->
@@ -14,7 +14,6 @@
 		<!-- END HEADER SECTION -->
 
 		<!-- MENU SECTION -->
-		<%@ include file="/WEB-INF/views/common/menu.jsp"%>
 		<!--END MENU SECTION -->
 
 		<!--PAGE CONTENT -->

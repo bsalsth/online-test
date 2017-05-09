@@ -114,7 +114,12 @@ public class TestController {
 		
 		aTest = ts.findByAccessKey(accessKey);
 		
-		model.addAttribute("testModel", aTest);
+		//if test has been taken, request a new access key
+		if (aTest == null || aTest.getTestDate() != null) {
+			model.addAttribute("testModel", null);
+		} else {
+			model.addAttribute("testModel", aTest);
+		}
 		
 		return "testInfo";
 	}
@@ -156,12 +161,14 @@ public class TestController {
 		}
 		beanTesting.setCurSubcatPos(beanTesting.getCurSubcatPos());
 		beanTesting.setCurQuesPos(beanTesting.getCurQuesPos());
+		beanTesting.setTotalSubcat(listQuestions4Testing.size());
 		
 		User u = aTest.getUser();
 		if (u == null) {
 			u = new User("mkt", "", "Minh", "Truong", "email@email.com");
 		}
 		beanTesting.setStudent(u);
+		beanTesting.setTimeLeft(System.currentTimeMillis() + 60 * 1000 * Integer.parseInt(confService.findConfigurationValue("testDuration")));
 		
 		//For test result page
 		beanTestResult = new BeanTestResult(gs);
@@ -217,7 +224,6 @@ public class TestController {
 			//Have to be called when merging the code
 //			saveStudentTestQuestion();
 			
-			
 			//Go to the next subCat's question if we still have some more left
 			int nextSucatPos = beanTesting.getCurSubcatPos() + 1;
 			
@@ -229,14 +235,19 @@ public class TestController {
 				beanTesting.setCurQuesPos(0);
 			} else {
 				//Finished the test, show the result test page.
-				model.addAttribute("beanTestResult", beanTestResult);
-				return "testResult";
+				return ontestResult(model);
 			}
 		}
 		
 		return "testStart";
 	}
 
+	@RequestMapping(value = "/end", method = RequestMethod.POST)
+	public String ontestResult(Model model) {
+		model.addAttribute("beanTestResult", beanTestResult);
+		return "testResult";
+	}
+	
 	private void saveStudentTestQuestion() {
 		aTest.setTestDate(new Date());
 
@@ -249,10 +260,13 @@ public class TestController {
 //			tqs.save(tq);
 			
 			Question q = tq.getQuestion();
-			q.setUsed(true);
-			qs.saveOrUpdateQuestion(q);
+			if (!q.isUsed()) {
+				q.setUsed(true);
+				qs.saveOrUpdateQuestion(q);
+			}
 		}
 		
 		ts.save(aTest);
+		listTestQues4SavingToDB = new ArrayList<>();
 	}
 }

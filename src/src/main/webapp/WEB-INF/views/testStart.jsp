@@ -27,12 +27,8 @@
 <link rel="stylesheet" href="../resources/css/MoneAdmin.css" />
 <link rel="stylesheet" href="../resources/css/font-awesome.css" />
 <!--END GLOBAL STYLES -->
-<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-<!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-    <![endif]-->
-</head>
+
+
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
 <body class="padTop53 ">
@@ -49,12 +45,11 @@
 							</div>
 							<h5>Question ${beanTesting.curQuesPos + 1}/${beanTesting.totalQuesInCurSubcat}</h5>
 
-							<div class="toolbar">
-								<ul class="nav pull-right">
-									<li><i>(Time: 1:27 sec)</i></li>
-								</ul>
+							<div class="toolbar" style="vertical-align:middle">
+									<p id="timerCountDown"></p>
 							</div>
 						</header>
+							<form:hidden path="timeLeft"/>
 						<div id="div-5" class="">
 							<!-- INDIVIDUAL QUESTIONS HERE -->
 							<div class="panel panel-default ">
@@ -98,6 +93,35 @@
 	</div>
 	<!--END FOOTER -->
 
+
+<script>
+// Set the date we're counting down to
+var countDownDate = ${beanTesting.timeLeft};
+
+// Update the count down every 1 second
+var x = setInterval(function() {
+
+    var now = new Date().getTime();
+    
+    // Find the distance between now an the count down date
+    var distance = countDownDate - now;
+    
+    // Time calculations for days, hours, minutes and seconds
+    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    
+    $("#timerCountDown").html(hours + "h " + minutes + "m " + seconds + "s");
+    $("#timeLeft").val($("#timeLeft").val() - 1000);
+    // If the count down is over, write some text 
+    if (distance < 0) {
+        clearInterval(x);
+        var form = document.getElementById("beanTesting");
+        form.action = "${pageContext.request.contextPath}/test/end";
+        form.submit();
+    }
+}, 1000);
+</script>
 
 </body>
 <!-- END BODY -->

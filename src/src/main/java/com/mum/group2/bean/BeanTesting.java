@@ -13,6 +13,8 @@ public class BeanTesting extends BeanSelectCatSubcat {
 	private String curSubcatName = "";
 	private int totalQuesInCurSubcat = 0;
 	private User student;
+	
+	private long timeLeft = 0l;
 
 	private int ans4Ques = 0;
 
@@ -32,7 +34,6 @@ public class BeanTesting extends BeanSelectCatSubcat {
 		super();
 		this.beanCategoriesModel = beanCategoriesModel;
 		this.listQuestions4Testing = listQuestions4Testing;
-		totalSubcat = listQuestions4Testing.size();
 		
 		setCatName(findCatName(getCatId()));
 	}
@@ -151,6 +152,18 @@ public class BeanTesting extends BeanSelectCatSubcat {
 		}
 		
 		return ret;
+	}
+
+	public long getTimeLeft() {
+		return timeLeft;
+	}
+
+	public void setTimeLeft(long timeLeft) {
+		this.timeLeft = timeLeft;
+	}
+
+	public void setTotalSubcat(int totalSubcat) {
+		this.totalSubcat = totalSubcat;
 	}
 	
 	

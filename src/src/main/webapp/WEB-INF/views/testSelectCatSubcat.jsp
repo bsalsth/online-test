@@ -10,7 +10,7 @@
 	$(document).ready(
 		function() {
 			$('#catId').on('change', function() {
-				var selectedIndex = document.getElementById('catId').selectedIndex;
+				var selectedIndex = $("#catId option:selected").index();
 				if (selectedIndex != 0) {
 					listSubCat = categories[selectedIndex - 1].listSubcat
 					$('#subCatCheckBox').html(

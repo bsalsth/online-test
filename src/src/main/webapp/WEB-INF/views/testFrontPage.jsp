@@ -43,7 +43,8 @@
 						Enter your access id:</p>
 					<form:input type="text" path="accessKey" placeholder="Access ID"
 						class="form-control" />
-					<button class="btn text-muted text-center btn-danger" type="submit">Submit</button>
+					<br/>
+					<button class="btn text-muted text-center btn-success" type="submit">Submit</button>
 				</form:form>
 			</div>
 		</div>

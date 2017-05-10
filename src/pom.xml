@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 15e3ab13bd116c9b626e0eb4974d99805e4c85e9
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
@@ -275,6 +278,7 @@
 
 		</plugins>
 	</build>
+<<<<<<< HEAD
 </project>
 =======
 <?xml version="1.0" encoding="UTF-8"?>
@@ -545,3 +549,6 @@
 	</build>
 </project>
 >>>>>>> 32587250118e8c2aa61226c1c9e0e89d6a5fda56
+=======
+</project>
+>>>>>>> 15e3ab13bd116c9b626e0eb4974d99805e4c85e9

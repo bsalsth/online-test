@@ -19,15 +19,13 @@
 
 
 
-
-
 		<!--PAGE CONTENT -->
 		<div id="content" class="col-lg-12">
 
 			<div class="inner col-lg-12" style="min-height: 700px;">
 				<div class="row">
 					<div class="col-lg-12">
-						<h1>Dashboard</h1>
+						<h1>Coach Dashboard</h1>
 					</div>
 				</div>
 				<hr />

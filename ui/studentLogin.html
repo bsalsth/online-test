@@ -42,12 +42,36 @@
                     Enter your access id:
                 </p>
                 <input type="text" placeholder="Access ID" class="form-control" />
-                <button class="btn text-muted text-center btn-danger" type="submit">Submit</button>
+           <!--      <button class="btn text-muted text-center btn-danger" type="submit">Submit</button> -->
+
+                <button class="btn btn-success" data-toggle="modal"
+															data-target="#buttonedModal">Login 
+														</button>
             </form>
         </div>
-</div>
 
-   <a id="add_row" class="btn btn-default pull-left">Add Row</a><a id='delete_row' class="pull-right btn btn-default">Delete Row</a>
+        <!-- ACESS KEY MODAL -->
+			<div class="col-lg-12">
+				<div class="modal fade" id="buttonedModal" tabindex="-1"
+					role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal"
+									aria-hidden="true">&times;</button>
+								<h4 class="modal-title" id="H1">Access key</h4>
+							</div>
+							<div class="modal-body">5435HKJLJKLJKL98</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default"
+									data-dismiss="modal">Close</button>
+								<button type="button" class="btn btn-primary">Send Via Email</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+</div>
 
 	  <!--END PAGE CONTENT -->     
 	      
@@ -56,25 +80,6 @@
       <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
    <script src="assets/js/login.js"></script>
       <!--END PAGE LEVEL SCRIPTS -->
-
- <script>
-         // $(document).ready(function () {
-         //     $('#dataTables-example').dataTable();
-         // });
-               var i=1;
-     $("#add_row").click(function(){
-      $('#addr'+i).html("<td>"+ (i+1) +"</td><td><input name='user"+i+"' type='text' placeholder='User' class='form-control input-md'  /></td><td><input  name='pass"+i+"' type='text' placeholder='Password'  class='form-control input-md'></td><td><input  name='ip"+i+"' type='text' placeholder='IP'  class='form-control input-md'></td><td><input  name='country"+i+"' type='text' placeholder='Country'  class='form-control input-md'></td><td><input  name='ipDisp"+i+"' type='text' placeholder='IP details'  class='form-control input-md'></td>");
-
-      $('#tab_logic').append('<tr id="addr'+(i+1)+'"></tr>');
-      i++; 
-  });
-     $("#delete_row").click(function(){
-         if(i>1){
-         $("#addr"+(i-1)).html('');
-         i--;
-         }
-     });
-    </script>
 </body>
     <!-- END BODY -->
 </html>

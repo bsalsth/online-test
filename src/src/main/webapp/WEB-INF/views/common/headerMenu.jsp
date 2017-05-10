@@ -7,7 +7,10 @@
                 <!-- LOGO SECTION -->
                 <header class="navbar-header">
 
-                  
+                    <a href="index.html" class="navbar-brand">
+                    <img style="width: 50px; height: 40px;" src="${pageContext.request.contextPath}/resources/img/mum.png" alt="" />
+                        
+                        </a>
                 </header>
                 <!-- END LOGO SECTION -->
                 <ul class="nav navbar-top-links navbar-right">
@@ -25,7 +28,7 @@
                             <li><a href="#"><i class="icon-gear"></i> Settings </a>
                             </li>
                             <li class="divider"></li>
-                               <a href="<c:url value="/logout" />" ><i class="icon-signout"></i>  Logout</a>
+                             <a href='<c:url value="${logoutUrl}" />' ><i class="icon-signout"></i>  Logout</a>
                             </li>
                         </ul>
 

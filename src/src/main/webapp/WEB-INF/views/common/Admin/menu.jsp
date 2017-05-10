@@ -78,6 +78,18 @@
 		<li class="panel"><a href="${pageContext.request.contextPath}/report/list"> <i
 				class="icon-folder-open-alt"></i> Reports
 		</a></li>
+		<!-- test menu -->
+		<li class="panel"><a href="test_result.html"> <i
+				class="icon-folder-open-alt"></i> Test Page
+		</a></li>
+		<li class="panel"><a href="editUser.html"> <i
+				class="icon-folder-open-alt"></i> Add Question
+		</a></li>
+		<li class="panel"><a href="test_frontend.html"> <i
+				class="icon-folder-open-alt"></i> TEST UI
+		</a></li>
+
+		<li><a href="login.html"><i class="icon-signin"></i> Login </a></li>
 
 	</ul>
 

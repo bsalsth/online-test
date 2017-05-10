@@ -8,7 +8,13 @@
 		<div class="media-body">
 			<h5 class="media-heading">
 			<%= session.getAttribute( "currentUserName" ) %>
+			
 			</h5>
+			 <p th:text="${session.currentUserName}" th:unless="${session == null}">[...]</p>
+
+<c:if test="${session.currentUserName != null}">
+    There is a user **attribute** in the session
+</c:if>
 		</div>
 		<br />
 	</div>

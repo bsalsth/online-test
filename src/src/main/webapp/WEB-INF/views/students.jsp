@@ -12,8 +12,9 @@
 		<!-- END HEADER SECTION -->
 
 
-
 		<!-- MENU SECTION -->
+
+	
 		<%@ include file="/WEB-INF/views/common/menu.jsp"%>
 		<!--END MENU SECTION -->
 
@@ -44,7 +45,8 @@
 												<td>1</td>
 
 												<td>Hacky Tack</td>
-												<td><a href="studentDetail"><i class="icon-eye-open"></i></a></td>
+												<td><a href="studentDetail"><i
+														class="icon-eye-open"></i></a></td>
 												<td class="center"><a class="center" href="#question3">
 														<i class="icon-edit"></i>
 												</a></td>
@@ -57,7 +59,8 @@
 												<td>2</td>
 
 												<td>Mr x</td>
-												<td><a href="reportDetailDemo"><i class="icon-eye-open"></i></a></td>
+												<td><a href="reportDetailDemo"><i
+														class="icon-eye-open"></i></a></td>
 												<td class="center"><a class="center" href="#question3">
 														<i class="icon-edit"></i>
 												</a></td>

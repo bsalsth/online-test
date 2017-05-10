@@ -3,7 +3,7 @@
 	<div class="media user-media well-small">
 		<a class="user-link" href="#"> <img
 			class="media-object img-thumbnail user-img" alt="User Picture"
-			src="${pageContext.request.contextPath}/resources/img/mum.png" />
+			src="${pageContext.request.contextPath}/resources/img/user.gif" />
 		</a> <br />
 		<div class="media-body">
 			<h5 class="media-heading">
@@ -73,11 +73,25 @@
 						List Questions </a></li>
 				<li><a href="addQuestionDemo"><i
 						class="icon-angle-right"></i> Add Question </a></li>
+				<li><a href="${pageContext.request.contextPath}/file"><i
+						class="icon-angle-right"></i> Load File Questions </a></li>
 			</ul></li>
 		<!-- reports -->
 		<li class="panel"><a href="${pageContext.request.contextPath}/report/list"> <i
 				class="icon-folder-open-alt"></i> Reports
 		</a></li>
+		<!-- test menu -->
+		<li class="panel"><a href="test_result.html"> <i
+				class="icon-folder-open-alt"></i> Test Page
+		</a></li>
+		<li class="panel"><a href="editUser.html"> <i
+				class="icon-folder-open-alt"></i> Add Question
+		</a></li>
+		<li class="panel"><a href="test_frontend.html"> <i
+				class="icon-folder-open-alt"></i> TEST UI
+		</a></li>
+
+		<li><a href="login.html"><i class="icon-signin"></i> Login </a></li>
 
 	</ul>
 

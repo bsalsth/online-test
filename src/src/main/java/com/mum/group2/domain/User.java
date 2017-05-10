@@ -1,7 +1,7 @@
 package com.mum.group2.domain;
 
 import java.util.Collection;
-import java.util.Collections;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -40,23 +40,12 @@ public class User {
 	private String lastName;
 	private String email;
 
-	private boolean enabled = true;
-	
-	public boolean isEnabled() {
-		return enabled;
-	}
-
-
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
-	}
-
 	@Fetch(FetchMode.SELECT)
 	@ManyToMany(fetch=FetchType.LAZY)
 	@JoinTable(name="USER_ROLE",
 		    joinColumns=@JoinColumn(name="user_id", referencedColumnName="user_id"),
 		    inverseJoinColumns=@JoinColumn(name="role_id", referencedColumnName="role_id"))
-	private Set<Role> roles = Collections.emptySet();	
+	private Set<Role> roles = new HashSet<Role>();	
 	
 	
 	

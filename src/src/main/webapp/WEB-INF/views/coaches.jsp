@@ -13,10 +13,17 @@
 
 
 
-		<!-- MENU SECTION -->
-		<%@ include file="/WEB-INF/views/common/menu.jsp"%>
+	<!-- MENU SECTION -->
+		<c:if test="${sessionScope.currentRole == 'Coach'}">
+		<%@ include file="/WEB-INF/views/common/Coach/menu.jsp"%>
+		</c:if>
+		<c:if test="${sessionScope.currentRole == 'Admin'}">
+		<%@ include file="/WEB-INF/views/common/Admin/menu.jsp"%>
+		</c:if>
+		<c:if test="${sessionScope.currentRole == 'DataManager'}">
+		<%@ include file="/WEB-INF/views/common/DataManager/menu.jsp"%>
+		</c:if>
 		<!--END MENU SECTION -->
-
 
 
 		<!--PAGE CONTENT -->
@@ -25,8 +32,7 @@
 				<div class="row">
 					<div class="col-lg-12">
 						<div class="panel panel-default">
-							<div class="panel-heading">Coaches  hello</div>
-							<h1>Message : ${message}</h1>
+							<div class="panel-heading">Coaches</div>
 							<div class="panel-body">
 								<div class="table-responsive">
 									<table class="table table-striped table-bordered table-hover"

@@ -12,7 +12,7 @@
         <intercept-url pattern="/" access="hasAnyAuthority('Admin','Coach','DataManager')" />
         
 		<form-login 
-				login-page="/loginn" 
+				login-page="/login" 
 				login-processing-url="/postLogin"
 				username-parameter="username" 
 				password-parameter="password"

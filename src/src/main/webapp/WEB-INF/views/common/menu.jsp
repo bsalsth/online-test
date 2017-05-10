@@ -6,7 +6,9 @@
 			src="${pageContext.request.contextPath}/resources/img/user.gif" />
 		</a> <br />
 		<div class="media-body">
-			<h5 class="media-heading">Joe Romlin</h5>
+			<h5 class="media-heading">
+			<%= session.getAttribute( "currentUserName" ) %>
+			</h5>
 
 		</div>
 		<br />

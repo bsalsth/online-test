@@ -25,7 +25,8 @@
 				<div class="row">
 					<div class="col-lg-12">
 						<div class="panel panel-default">
-							<div class="panel-heading">Coaches</div>
+							<div class="panel-heading">Coaches  hello</div>
+							<h1>Message : ${message}</h1>
 							<div class="panel-body">
 								<div class="table-responsive">
 									<table class="table table-striped table-bordered table-hover"

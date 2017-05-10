@@ -19,6 +19,17 @@ public class Configuration {
 	@Column(name="VALUE")
 	private String value;
 
+	
+	public Configuration() {
+		super();
+	}
+
+	public Configuration(String name, String value) {
+		super();
+		this.name = name;
+		this.value = value;
+	}
+
 	public int getConfId() {
 		return confId;
 	}

@@ -46,7 +46,7 @@
 							<h5>Question ${beanTesting.curQuesPos + 1}/${beanTesting.totalQuesInCurSubcat}</h5>
 
 							<div class="toolbar" style="vertical-align:middle">
-									<p id="timerCountDown"></p>
+									<p id="timerCountDown" class="text-success"></p>
 							</div>
 						</header>
 							<form:hidden path="timeLeft"/>
@@ -111,7 +111,14 @@ var x = setInterval(function() {
     var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
     
-    $("#timerCountDown").html(hours + "h " + minutes + "m " + seconds + "s");
+    $("#timerCountDown").html(hours != 0 ? hours + "h " : "" + minutes + "m " + seconds + "s");
+    
+    if (minutes <= ${beanTesting.dangerTime}) {
+    	document.getElementById("timerCountDown").style.color = "red";
+    } else if (minutes <= ${beanTesting.warningTime}) {
+    	document.getElementById("timerCountDown").style.color  = "orange";
+    	document.getElementById("timerCountDown").style.fontWeight = "bold"
+    } 
     $("#timeLeft").val($("#timeLeft").val() - 1000);
     // If the count down is over, write some text 
     if (distance < 0) {

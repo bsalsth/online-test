@@ -14,6 +14,8 @@
 
 </head>
 <body>
+	<%@ include file="/WEB-INF/views/common/headerMenu.jsp"%>
+	
 	<div id="content">
 		<div class="inner">
 

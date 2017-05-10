@@ -126,7 +126,8 @@ public class TestController {
 	
 	@RequestMapping(value = "/selectCatSubcat", method = RequestMethod.GET)
 	public String selectCatSubcat(Model model) {
-		numQuestion = Integer.parseInt(confService.findConfigurationValue("numberOfQuestions"));
+		numQuestion = Integer.parseInt(
+				confService.findConfigurationValue(ConfigurationService.NUM_OF_QUESTIONS));
 		
 		beanCategoriesModel = cs.getAllCategories(numQuestion);
 		model.addAttribute("categoriesModel", beanCategoriesModel);
@@ -168,7 +169,10 @@ public class TestController {
 			u = new User("mkt", "", "Minh", "Truong", "email@email.com");
 		}
 		beanTesting.setStudent(u);
-		beanTesting.setTimeLeft(System.currentTimeMillis() + 60 * 1000 * Integer.parseInt(confService.findConfigurationValue("testDuration")));
+		beanTesting.setTimeLeft(System.currentTimeMillis() + 60 * 1000 
+				* Integer.parseInt(confService.findConfigurationValue(ConfigurationService.TEST_DURATION)));
+		beanTesting.setWarningTime(Integer.parseInt(confService.findConfigurationValue(ConfigurationService.WARNING_TIME)));
+		beanTesting.setDangerTime(Integer.parseInt(confService.findConfigurationValue(ConfigurationService.DANGER_TIME)));
 		
 		//For test result page
 		beanTestResult = new BeanTestResult(gs);
@@ -219,11 +223,6 @@ public class TestController {
 		if (nextQuestion < listQues.size()) {
 			beanTesting.setCurQuesPos(nextQuestion);
 		} else {
-			//Save the student's answer to DB if no more question in current subCat
-			
-			//Have to be called when merging the code
-			saveStudentTestQuestion();
-			
 			//Go to the next subCat's question if we still have some more left
 			int nextSucatPos = beanTesting.getCurSubcatPos() + 1;
 			
@@ -245,6 +244,21 @@ public class TestController {
 	@RequestMapping(value = "/end", method = RequestMethod.POST)
 	public String ontestResult(Model model) {
 		model.addAttribute("beanTestResult", beanTestResult);
+		
+		if (listTestQues4SavingToDB.size() < beanTesting.getTotalSubcat() * beanTesting.getTotalQuesInCurSubcat()) {
+			for (int i = beanTesting.getCurSubcatPos(); i < beanTesting.getTotalSubcat(); i++) {
+				beanTesting.setCurSubcatPos(i);
+				for (int j = beanTesting.getCurQuesPos(); j < beanTesting.getTotalQuesInCurSubcat(); j++) {
+					TestQuestion tq = new TestQuestion();
+					tq.setQuestion(beanTesting.getCurQues());
+					listTestQues4SavingToDB.add(tq);
+					
+					beanTesting.setCurQuesPos(j);
+				}
+				beanTesting.setCurQuesPos(0);
+			}
+		}
+		saveStudentTestQuestion();
 		return "testResult";
 	}
 	

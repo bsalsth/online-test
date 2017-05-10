@@ -26,6 +26,9 @@ public class BeanTesting extends BeanSelectCatSubcat {
 	private List<BeanCategory> beanCategoriesModel;
 	private Hashtable<Integer, List<Question>> listQuestions4Testing;
 	
+	private int dangerTime = 0;
+	private int warningTime = 0;
+	
 	public BeanTesting() {
 		super();
 	}
@@ -165,6 +168,20 @@ public class BeanTesting extends BeanSelectCatSubcat {
 	public void setTotalSubcat(int totalSubcat) {
 		this.totalSubcat = totalSubcat;
 	}
-	
-	
+
+	public int getDangerTime() {
+		return dangerTime;
+	}
+
+	public void setDangerTime(int dangerTime) {
+		this.dangerTime = dangerTime;
+	}
+
+	public int getWarningTime() {
+		return warningTime;
+	}
+
+	public void setWarningTime(int warningTime) {
+		this.warningTime = warningTime;
+	}
 }

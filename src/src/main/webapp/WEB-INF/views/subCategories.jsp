@@ -29,39 +29,50 @@
 				<div class="row">
 					<div class="col-lg-12">
 						<div class="panel panel-default">
-							<div class="panel-heading">Add Sub Category</div>
+							<div class="panel-heading">Sub Category</div>
 							<div class="panel-body">
-								<form:form method="post" modelAttribute="subCategoryAdd"
-									action="${pageContext.request.contextPath}/subCategory/saveSubCategory">
-									<tr>
-										<td>Category :</td>
-										<td><form:select path="subCategoryAdd.catId">
-												<form:options items="${categoryMap}" />
-											</form:select></td>
-
-										<td>SubCategory :</td>
-										<td><form:input path="description" /></td>
-									</tr>
-									<tr>
-										<td></td>
-										<td><input type="submit" value="Save" /></td>
-									</tr>
-								</form:form>
+								<div class="panel panel-primary">
+									<div class="panel-heading">Add New Sub Category</div>
+									<div class="table-responsive">
+										<form:form method="post" modelAttribute="subCategoryAdd"
+											action="${pageContext.request.contextPath}/subCategory/saveASubCategory">
+											<table class="table table-striped table-bordered table-hover">
+												<tr>
+													<td width="20%">Category:</td>
+													<td><form:select path="category.catId">
+															<form:options items="${categoryMap}" />
+														</form:select></td>
+												</tr>
+												<tr>
+													<td>SubCategory:</td>
+													<td><form:input path="description" /></td>
+												</tr>
+												<tr>
+													<td></td>
+													<td><input type="submit" value="Save" /></td>
+												</tr>
+											</table>
+										</form:form>
+										<br />
+									</div>
+								</div>
 								<div class="panel panel-primary">
 									<div class="panel-heading">Sub Category List</div>
 									<div class="table-responsive">
 										<table class="table table-striped table-bordered table-hover">
 											<thead>
 												<tr>
-													<th width="10%">Category Id</th>
+													<th width="10%">Sub Cat Id</th>
+													<th>Sub Cat Name</th>
 													<th>Category Name</th>
 												</tr>
 											</thead>
 											<tbody>
-												<c:forEach var="category" items="${categoryView}">
+												<c:forEach var="subCategory" items="${listSubCat}">
 													<tr>
-														<td>${category.catId}</td>
-														<td>${category.description}</td>
+														<td>${subCategory.subCatId}</td>
+														<td>${subCategory.description}</td>
+														<td>${subCategory.category.description}</td>
 													</tr>
 												</c:forEach>
 											</tbody>

@@ -30,12 +30,21 @@ public class SubCategoryController {
 	//[MT 2017-05-10 01:27]
 	@RequestMapping(method = RequestMethod.GET)
 	public String showCategories(Model model) {
-		List<SubCategory> list = subCategoryService.findAllSubCategories();
+		List<SubCategory> listSubCat = subCategoryService.findAllSubCategories();
 		
-		model.addAttribute("categoryAdd", new SubCategory());
-		model.addAttribute("subCategoryView", list);
+		List<Category> listCat = categoryService.findAllCategories();
+		model.addAttribute("subCategoryAdd", new SubCategory());
+		model.addAttribute("listCategories", listCat);
+		model.addAttribute("listSubCat", listSubCat);
 		
 		return "subCategories";
+	}
+	
+	//[MT 2017-05-10 02:41]
+	@RequestMapping(value = "/saveASubCategory", method = RequestMethod.POST)
+	public ModelAndView saveACategory(@ModelAttribute("subCategory") SubCategory subCategory) {
+		subCategoryService.saveOrUpdateSubCategory(subCategory);
+		return new ModelAndView("redirect:/subCategory");
 	}
 	
 	@RequestMapping(value = "/subCategoryForm", method = RequestMethod.GET)

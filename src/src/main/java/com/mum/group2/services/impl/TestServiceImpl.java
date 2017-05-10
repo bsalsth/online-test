@@ -28,11 +28,6 @@ public class TestServiceImpl implements TestService {
 	public List<Test> findAll() {
 		return (List<Test>)testRepository.findAll();
 	}
-
-//	@Override
-//	public Test findTestWithStudentIDTestID(int studentID, int testID) {
-//		return testRepository.findTestWithStudentIDTestID(studentID, testID);
-//	}
 	
 	@Override
 	public Test findByUserAndSessionKey(User user, String sessionKey) {
@@ -42,6 +37,11 @@ public class TestServiceImpl implements TestService {
 	@Override
 	public List<Test> getAllOrderByTestDate() {
 		return testRepository.getAllOrderByTestDate();
+	}
+
+	@Override
+	public Test findByAccessKey(String sessionKey) {
+		return testRepository.findByAccessKey(sessionKey);
 	}
 	
  }

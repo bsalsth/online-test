@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mum.group2.Utils;
-import com.mum.group2.bean.UserTest;
+import com.mum.group2.bean.BeanUserTest;
 import com.mum.group2.domain.Role;
 import com.mum.group2.domain.Test;
 import com.mum.group2.domain.User;

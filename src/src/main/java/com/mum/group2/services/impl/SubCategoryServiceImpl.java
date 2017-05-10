@@ -23,8 +23,8 @@ public class SubCategoryServiceImpl implements SubCategoryService {
 	}
 
 	@Override
-	public void saveOrUpdateSubCategory(SubCategory subCategory) {
-		subCategoryRepository.save(subCategory);
+	public SubCategory saveOrUpdateSubCategory(SubCategory subCategory) {
+		return subCategoryRepository.save(subCategory);
 	}
 
 	@Override
@@ -52,6 +52,12 @@ public class SubCategoryServiceImpl implements SubCategoryService {
 		return collQuestion.size() > numQuestion ? 
 				collQuestion.subList(0, numQuestion) :
 					collQuestion.subList(0, collQuestion.size());
+	}
+	
+	
+	@Override
+	public SubCategory findByDescription(String description) {
+		return subCategoryRepository.findByDescription(description);
 	}
 
 }

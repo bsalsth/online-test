@@ -1,14 +1,15 @@
 package com.mum.group2.bean;
 
-public class UserTest {
+public class BeanUserTest {
 	private int userId;
+	private String accessKey; //is a sessionKey in Test table
 	private int testId;
 
-	public UserTest() {
+	public BeanUserTest() {
 		super();
 	}
 
-	public UserTest(int userID, int testID) {
+	public BeanUserTest(int userID, int testID) {
 		super();
 		this.userId = userID;
 		this.testId = testID;
@@ -30,4 +31,13 @@ public class UserTest {
 		this.testId = testID;
 	}
 
+	public String getAccessKey() {
+		return accessKey;
+	}
+
+	public void setAccessKey(String accessKey) {
+		this.accessKey = accessKey;
+	}
+
+	
 }

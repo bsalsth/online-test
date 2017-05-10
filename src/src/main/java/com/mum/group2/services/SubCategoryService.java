@@ -9,7 +9,7 @@ public interface SubCategoryService {
 
 	public List<SubCategory> findAllSubCategories();
 
-	public void saveOrUpdateSubCategory(SubCategory subCategory);
+	public SubCategory saveOrUpdateSubCategory(SubCategory subCategory);
 
 	public SubCategory getSubCategoryById(int subCatId);
 
@@ -18,4 +18,7 @@ public interface SubCategoryService {
 //	public List<SubCategory> getFirst5Question();
 	
 	public List<Question> getFirstNQuestion(int subCatId, int numQuestion);
+	
+	
+	public SubCategory findByDescription(String description);
 }

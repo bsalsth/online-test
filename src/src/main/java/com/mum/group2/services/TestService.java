@@ -10,9 +10,10 @@ public interface TestService {
 	public Test get(int id);
 	public List<Test> findAll();
 	
-//	public Test findTestWithStudentIDTestID(int studentID, int testID);
-	
 	public Test findByUserAndSessionKey(User user, String sessionKey);
+
+	//2017-05-07 MT
+	public Test findByAccessKey(String sessionKey);
 	
 	public List<Test> getAllOrderByTestDate();
 	

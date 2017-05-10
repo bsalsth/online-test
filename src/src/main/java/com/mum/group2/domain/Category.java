@@ -2,6 +2,8 @@ package com.mum.group2.domain;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Enumeration;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -63,11 +65,13 @@ public class Category {
 	}
 	
 	public Collection<SubCategory> getSubCatCollection() {
-		return subCatCollection;
+//		return subCatCollection;
+		return subcategories;
 	}
 
 	public void setSubCatCollection(Collection<SubCategory> subCatCollection) {
-		this.subCatCollection = subCatCollection;
+//		this.subCatCollection = subCatCollection;
+		this.subcategories = Collections.list((Enumeration<SubCategory>) subCatCollection);
 	}
 	
 	public List<SubCategory> getSubcategories() {

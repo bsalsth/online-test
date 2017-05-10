@@ -25,8 +25,8 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
-	public void saveOrUpdateCategory(Category category) {
-		categoryRepository.save(category);
+	public Category saveOrUpdateCategory(Category category) {
+		return categoryRepository.save(category);
 	}
 
 	@Override
@@ -40,7 +40,7 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
-	public List<BeanCategory> getAllCategories() {
+	public List<BeanCategory> getAllCategories(int minimumQuestionPerSubCat) {
 		List<Category> listCat = findAllCategories();
 		
 		ArrayList<BeanCategory> retList = new ArrayList<BeanCategory>();
@@ -49,12 +49,24 @@ public class CategoryServiceImpl implements CategoryService {
 			ArrayList<BeanSubcat> listBeanSubcat = bc.getListSubcat();
 			
 			Collection<SubCategory> listSubcat = cat.getSubCatCollection();
+			boolean goodWithMinQuestions = false;
 			for (SubCategory subCat : listSubcat) {
-				listBeanSubcat.add(new BeanSubcat(subCat.getSubCatId(), subCat.getDescription()));
+				goodWithMinQuestions = subCat.getQuestionCollection().size() >= minimumQuestionPerSubCat;
+				if (goodWithMinQuestions) {
+					listBeanSubcat.add(new BeanSubcat(subCat.getSubCatId(), subCat.getDescription()));
+				}
 			}
-			retList.add(bc);
+			if (listBeanSubcat.size() != 0) {
+				retList.add(bc);
+			}
 		}
 		return retList;
+	}
+	
+	
+	@Override
+	public Category findByDescription(String description) {
+		return categoryRepository.findByDescription(description);
 	}
 
 }

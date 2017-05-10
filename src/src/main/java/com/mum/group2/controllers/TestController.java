@@ -1,5 +1,7 @@
 package com.mum.group2.controllers;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.Hashtable;
 import java.util.List;
 
@@ -18,14 +20,20 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mum.group2.Utils;
 import com.mum.group2.bean.BeanCategory;
+import com.mum.group2.bean.BeanSelectCatSubcat;
+import com.mum.group2.bean.BeanTestResult;
 import com.mum.group2.bean.BeanTesting;
-import com.mum.group2.bean.SelectCatSubcat;
-import com.mum.group2.bean.UserTest;
+import com.mum.group2.bean.BeanUserTest;
 import com.mum.group2.domain.Question;
 import com.mum.group2.domain.Test;
+import com.mum.group2.domain.TestQuestion;
 import com.mum.group2.domain.User;
 import com.mum.group2.services.CategoryService;
+import com.mum.group2.services.ConfigurationService;
+import com.mum.group2.services.GradeService;
+import com.mum.group2.services.QuestionService;
 import com.mum.group2.services.SubCategoryService;
+import com.mum.group2.services.TestQuestionService;
 import com.mum.group2.services.TestService;
 import com.mum.group2.services.UserService;
 
@@ -45,6 +53,12 @@ public class TestController {
 	TestService ts;
 	
 	@Autowired
+	TestQuestionService tqs;
+	
+	@Autowired
+	QuestionService qs;
+	
+	@Autowired
 	UserService us;
 	
 	@Autowired
@@ -53,42 +67,77 @@ public class TestController {
 	@Autowired
 	SubCategoryService scs;
 	
+	@Autowired
+	ConfigurationService confService;
+	
+	@Autowired
+	GradeService gs;
+	
+	
+	
 	//private Vector<SubCategory> vListSubCatToTest = new Vector<>();
 	private Hashtable<Integer, List<Question>> listQuestions4Testing = new Hashtable<>();
 	
 	List<BeanCategory> beanCategoriesModel;
-	BeanTesting beanTesting;
+	
+	private BeanTesting beanTesting;
+	private BeanTestResult beanTestResult;
+	
+	private Test aTest = new Test();
+	
+	private int numQuestion = 3;
+
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public String showStudentLogin(Model model) {
 		Utils.serverTime(model);
-		
-		model.addAttribute("userTestModel", new UserTest());
+
+		model.addAttribute("userTestModel", new BeanUserTest());
 		return "testFrontPage";
 	}
 
+//	@RequestMapping(value = "/testStatus", method = RequestMethod.POST)
+//	public String showStudentStatus(@ModelAttribute("userTestModel") BeanUserTest ut, Model model) {
+//		User student = us.get(ut.getUserId());
+//		Test t = student.getTestFromTestID(ut.getTestId());
+//		
+//		model.addAttribute("userModel", student);
+//		model.addAttribute("testModel", t);
+//		
+//		return "testInfo";
+//	}
+
+//	//For integration, following Jose approaching
 	@RequestMapping(value = "/testStatus", method = RequestMethod.POST)
-	public String showStudentStatus(@ModelAttribute("userTestModel") UserTest ut, Model model) {
-		User student = us.get(ut.getUserId());
-		Test t = student.getTestFromTestID(ut.getTestId());
+	public String showStudentStatus(@ModelAttribute("userTestModel") BeanUserTest ut, Model model) {
+		String accessKey = ut.getAccessKey();
 		
-		model.addAttribute("userModel", student);
-		model.addAttribute("testModel", t);
+		aTest = ts.findByAccessKey(accessKey);
+		
+		//if test has been taken, request a new access key
+		if (aTest == null || aTest.getTestDate() != null) {
+			model.addAttribute("testModel", null);
+		} else {
+			model.addAttribute("testModel", aTest);
+		}
 		
 		return "testInfo";
 	}
 	
 	@RequestMapping(value = "/selectCatSubcat", method = RequestMethod.GET)
 	public String selectCatSubcat(Model model) {
-		beanCategoriesModel = cs.getAllCategories();
+		numQuestion = Integer.parseInt(
+				confService.findConfigurationValue(ConfigurationService.NUM_OF_QUESTIONS));
+		
+		beanCategoriesModel = cs.getAllCategories(numQuestion);
 		model.addAttribute("categoriesModel", beanCategoriesModel);
 		model.addAttribute("categoriesJSON", JSONArray.fromObject(beanCategoriesModel));
-		model.addAttribute("selectCatSubcat", new SelectCatSubcat());
+		model.addAttribute("selectCatSubcat", new BeanSelectCatSubcat());
 		return "testSelectCatSubcat";
 	}
 	
 	@RequestMapping(value = "/selectCatSubcat", method = RequestMethod.POST)
-	public String startATest(@Valid @ModelAttribute("selectCatSubcat") SelectCatSubcat selectCatSubcat, RedirectAttributes redirectAttributes) {
+	public String startATest(@Valid @ModelAttribute("selectCatSubcat") BeanSelectCatSubcat selectCatSubcat, RedirectAttributes redirectAttributes) {
 
 		//@TODO: save information about the test to DB
 		
@@ -98,18 +147,39 @@ public class TestController {
 		 * 3. Show the first question to student
 		 */
 		
-		//TODO: get number of question/subCat from configuration
-		int numQuestion = 3;
+		
+		//reset the list
+		listQuestions4Testing = new Hashtable<>();
+		Hashtable<String, Integer> listResultForTest = new Hashtable<>();
+		
+		beanTesting = new BeanTesting(beanCategoriesModel, listQuestions4Testing);
+		BeanUtils.copyProperties(selectCatSubcat, beanTesting);
 		
 		for (Integer subCatId : selectCatSubcat.getSubCatId()) {
 			List<Question> listQues = scs.getFirstNQuestion(subCatId, numQuestion);
 			listQuestions4Testing.put(subCatId, listQues);
+			listResultForTest.put(beanTesting.findSubcatName(beanTesting.getCatId(), subCatId), 0);
 		}
-		
-		beanTesting = new BeanTesting(beanCategoriesModel, listQuestions4Testing);
-		BeanUtils.copyProperties(selectCatSubcat, beanTesting);
-		beanTesting.setCurSubcatPos(beanTesting.getCurSucatPos());
+		beanTesting.setCurSubcatPos(beanTesting.getCurSubcatPos());
 		beanTesting.setCurQuesPos(beanTesting.getCurQuesPos());
+		beanTesting.setTotalSubcat(listQuestions4Testing.size());
+		
+		User u = aTest.getUser();
+		if (u == null) {
+			u = new User("mkt", "", "Minh", "Truong", "email@email.com");
+		}
+		beanTesting.setStudent(u);
+		beanTesting.setTimeLeft(System.currentTimeMillis() + 60 * 1000 
+				* Integer.parseInt(confService.findConfigurationValue(ConfigurationService.TEST_DURATION)));
+		beanTesting.setWarningTime(Integer.parseInt(confService.findConfigurationValue(ConfigurationService.WARNING_TIME)));
+		beanTesting.setDangerTime(Integer.parseInt(confService.findConfigurationValue(ConfigurationService.DANGER_TIME)));
+		
+		//For test result page
+		beanTestResult = new BeanTestResult(gs);
+		beanTestResult.setStudentName(u.getFirstName() + " " + u.getLastName());
+		beanTestResult.setCatNameOfTest(beanTesting.findCatName(beanTesting.getCatId()));
+		beanTestResult.setTotalQuestion(numQuestion);
+		beanTestResult.setListResultForTest(listResultForTest);
 		
 		redirectAttributes.addFlashAttribute("beanTesting", beanTesting);
 		return "redirect:/test/start";
@@ -118,44 +188,100 @@ public class TestController {
 	@RequestMapping(value = "/start", method = RequestMethod.GET)
 	public String startTest(@ModelAttribute("beanTesting") BeanTesting beanTestingModel, Model model) {
 		if (beanCategoriesModel == null) {
-			beanCategoriesModel = cs.getAllCategories();
+			beanCategoriesModel = cs.getAllCategories(numQuestion);
 		}
 
 		model.addAttribute("beanTesting", beanTesting); //keep tracking the testing progress
 		return "testStart";
 	}
 	
+	List<TestQuestion> listTestQues4SavingToDB = new ArrayList<>();
+	
 	@RequestMapping(value = "/start", method = RequestMethod.POST)
 	public String onGoingTest(@ModelAttribute("beanTesting") BeanTesting beanTestingModel, Model model) {
+		model.addAttribute("beanTesting", beanTesting); //keep tracking the testing progress
 		
-		//TODO: check to see if the answer is right of wrong
+		// check to see if the answer is right of wrong
 		int ans4Ques = beanTestingModel.getAns4Ques();
-		//continue to compare with result and put to some where :)
+		int rightAnsId = beanTesting.getCurQues().getRightAnswerId();
 		
+		TestQuestion tq = new TestQuestion();
+		tq.setAnswer(ans4Ques);
+		if (ans4Ques == rightAnsId) {
+			tq.setResult(true);
+			Integer result = beanTestResult.getListResultForTest().get(beanTesting.getCurSubcatName());
+			result += 1;
+			beanTestResult.getListResultForTest().put(beanTesting.getCurSubcatName(), result);
+		}
+		tq.setQuestion(beanTesting.getCurQues());
+		listTestQues4SavingToDB.add(tq);
 		
-		/*
-		 * 1. Save the student's answer to DB if no more question in current subCat
-		 * otherwise, continue to the next question
-		 */
 		List<Question> listQues = listQuestions4Testing.get(beanTesting.getCurSubcatId());
 
 		int nextQuestion = beanTesting.getCurQuesPos() + 1;
+		//if is there anymore question, continue to the next question
 		if (nextQuestion < listQues.size()) {
 			beanTesting.setCurQuesPos(nextQuestion);
 		} else {
-			//this is the latest question of current subCat, 
-			int curSucatPos = beanTesting.getCurSucatPos();
+			//Go to the next subCat's question if we still have some more left
+			int nextSucatPos = beanTesting.getCurSubcatPos() + 1;
 			
-			int nextSucatPos = curSucatPos + 1;
+			//if this is the latest question of current subCat, 
 			if (nextSucatPos < beanTesting.getSubCatId().size()) {
 				//should change to next subCat and reset the current question position to 0 
 				// if we still have some un-test subCats
 				beanTesting.setCurSubcatPos(nextSucatPos);
 				beanTesting.setCurQuesPos(0);
+			} else {
+				//Finished the test, show the result test page.
+				return ontestResult(model);
 			}
 		}
 		
-		model.addAttribute("beanTesting", beanTesting); //keep tracking the testing progress
 		return "testStart";
+	}
+
+	@RequestMapping(value = "/end", method = RequestMethod.POST)
+	public String ontestResult(Model model) {
+		model.addAttribute("beanTestResult", beanTestResult);
+		
+		if (listTestQues4SavingToDB.size() < beanTesting.getTotalSubcat() * beanTesting.getTotalQuesInCurSubcat()) {
+			for (int i = beanTesting.getCurSubcatPos(); i < beanTesting.getTotalSubcat(); i++) {
+				beanTesting.setCurSubcatPos(i);
+				for (int j = beanTesting.getCurQuesPos(); j < beanTesting.getTotalQuesInCurSubcat(); j++) {
+					TestQuestion tq = new TestQuestion();
+					tq.setQuestion(beanTesting.getCurQues());
+					listTestQues4SavingToDB.add(tq);
+					
+					beanTesting.setCurQuesPos(j);
+				}
+				beanTesting.setCurQuesPos(0);
+			}
+		}
+		saveStudentTestQuestion();
+		return "testResult";
+	}
+	
+	private void saveStudentTestQuestion() {
+		aTest.setTestDate(new Date());
+
+		for (TestQuestion tq : listTestQues4SavingToDB) {
+			//old approaching
+//			aTest.getTestQuestionCollection().add(tqs.save(tq));
+			
+			//Follow Jose approaching
+			tq.setTest(aTest);
+			tqs.save(tq);
+			
+			Question q = tq.getQuestion();
+			if (!q.isUsed()) {
+				q.setUsed(true);
+				qs.saveOrUpdateQuestion(q);
+			}
+		}
+		
+		ts.save(aTest);
+		
+		listTestQues4SavingToDB = new ArrayList<>();
 	}
 }

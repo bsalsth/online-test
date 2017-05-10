@@ -3,12 +3,13 @@ package com.mum.group2.bean;
 import java.util.Date;
 import java.util.List;
 
-public class SelectCatSubcat {
+public class BeanSelectCatSubcat {
 	private int testId;
 	private int studentId;
 	private String sessionkey;
 	private Date testDate;
 	private int catId;
+	private String catName;
 	private List<Integer> subCatId;
 	
 	public int getTestId() {
@@ -59,4 +60,13 @@ public class SelectCatSubcat {
 		this.catId = catId;
 	}
 
+	public String getCatName() {
+		return catName;
+	}
+
+	public void setCatName(String catName) {
+		this.catName = catName;
+	}
+
+	
 }

@@ -22,7 +22,7 @@
     <!--END GLOBAL STYLES -->
 
     <!-- PAGE LEVEL STYLES -->
-    <link href="${pageContext.request.contextPath}/resources/css/layout2.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/resources/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
        <link href="${pageContext.request.contextPath}/resources/plugins/flot/examples/examples.css" rel="stylesheet" />
        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/plugins/timeline/timeline.css" />
     <!-- END PAGE LEVEL  STYLES -->

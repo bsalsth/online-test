@@ -2,6 +2,8 @@ package com.mum.group2.domain;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Enumeration;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -74,11 +76,13 @@ public class Question {
 	}
 
 	public Collection<Answer> getAnswerCollection() {
-		return answerCollection;
+//		return answerCollection;
+		return answers;
 	}
 
 	public void setAnswerCollection(Collection<Answer> answerCollection) {
-		this.answerCollection = answerCollection;
+//		this.answerCollection = answerCollection;
+		this.answers = Collections.list((Enumeration<Answer>) answerCollection);
 	}
 
 	public boolean isActive() {
@@ -113,4 +117,12 @@ public class Question {
 		this.answers = answers;
 	}
 	
+	public int getRightAnswerId() {
+		for (Answer a : getAnswerCollection()) {
+			if (a.isRightAnswer()) {
+				return a.getAnswerId();
+			}
+		}
+		return 0;
+	}
 }

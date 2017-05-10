@@ -18,8 +18,8 @@ public class ConfigurationServiceImpl implements ConfigurationService {
 	public String findConfigurationValue(String name) {
 		if (isInit == false) {
 			init();
-			isInit = true;
 		}
+		isInit = true;
 		return cr.findConfigurationValue(name);
 	}
 

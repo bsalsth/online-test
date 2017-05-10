@@ -27,6 +27,17 @@ public class SubCategoryController {
 	@Autowired
 	SubCategoryService subCategoryService;
 
+	//[MT 2017-05-10 01:27]
+	@RequestMapping(method = RequestMethod.GET)
+	public String showCategories(Model model) {
+		List<SubCategory> list = subCategoryService.findAllSubCategories();
+		
+		model.addAttribute("categoryAdd", new SubCategory());
+		model.addAttribute("subCategoryView", list);
+		
+		return "subCategories";
+	}
+	
 	@RequestMapping(value = "/subCategoryForm", method = RequestMethod.GET)
 	public String subCategoryForm(Model model) {
 		model.addAttribute("command", new SubCategory());

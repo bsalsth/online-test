@@ -115,6 +115,8 @@ var x = setInterval(function() {
     
     if (minutes <= ${beanTesting.dangerTime}) {
     	document.getElementById("timerCountDown").style.color = "red";
+    	document.getElementById("timerCountDown").style.fontWeight = "bold"
+    	document.getElementById("timerCountDown").style.textDecoration = "blink";
     } else if (minutes <= ${beanTesting.warningTime}) {
     	document.getElementById("timerCountDown").style.color  = "orange";
     	document.getElementById("timerCountDown").style.fontWeight = "bold"

@@ -244,8 +244,9 @@ public class TestController {
 	@RequestMapping(value = "/end", method = RequestMethod.POST)
 	public String ontestResult(Model model) {
 		model.addAttribute("beanTestResult", beanTestResult);
-		
-		if (listTestQues4SavingToDB.size() < beanTesting.getTotalSubcat() * beanTesting.getTotalQuesInCurSubcat()) {
+		int totalQuestionFinished = listTestQues4SavingToDB.size();
+				
+		if (totalQuestionFinished < beanTesting.getTotalSubcat() * beanTesting.getTotalQuesInCurSubcat()) {
 			for (int i = beanTesting.getCurSubcatPos(); i < beanTesting.getTotalSubcat(); i++) {
 				beanTesting.setCurSubcatPos(i);
 				for (int j = beanTesting.getCurQuesPos(); j < beanTesting.getTotalQuesInCurSubcat(); j++) {

@@ -1,40 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:mvc="http://www.springframework.org/schema/mvc"
-	xmlns:security="http://www.springframework.org/schema/security"
-	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
-		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
-		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
-<!-- 
-	<security:global-method-security pre-post-annotations="enabled" />	
-	<security:http use-expressions="true">	  
-  		<security:form-login 
- 		 login-page="/login" 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/security
+	http://www.springframework.org/schema/security/spring-security.xsd">
+  <global-method-security pre-post-annotations="enabled"/>
+  <http auto-config="true" use-expressions="true">
+		<intercept-url pattern="/loginn" access="permitAll" />
+        <intercept-url pattern="/logout" access="permitAll" />
+        <intercept-url pattern="/" access="hasAnyAuthority('Admin','Coach','DataManager')" />
+        
+		<form-login 
+				login-page="/login" 
 				login-processing-url="/postLogin"
 				username-parameter="username" 
 				password-parameter="password"
- 			    default-target-url="/storeFront"    
-               always-use-default-target="false"   
-               authentication-failure-url="/loginfailed"/>
-         <security:logout logout-success-url="/logout" delete-cookies="JSESSIONID" logout-url= "/doLogout"/>
- 		<security:http-basic/>
-		<security:remember-me data-source-ref="dataSource" token-validity-seconds="86400" remember-me-parameter="keepMe"/> 		
-	</security:http>
+ 				default-target-url="/"
+                authentication-failure-url="/loginfailed"/>
+
+		<logout 
+			delete-cookies="JSESSIONID" 
+			invalidate-session="true" 
+		    logout-success-url="/login" 
+			/>
 	
- 	<security:authentication-manager>
-		<security:authentication-provider>
-			<security:password-encoder hash="bcrypt" />
-			<security:jdbc-user-service
+	 <csrf  disabled="true"/>
+	</http>
+			<beans:bean id="successHandler" class="com.mum.group2.controllers.AppSuccessHandler"></beans:bean>
+			<beans:bean id="customLogoutSuccessHandler" class="com.mum.group2.controllers.CustomLogoutSuccessHandler"/>
+	<authentication-manager  alias="authenticationManager" erase-credentials="false">
+		<authentication-provider>
+			<jdbc-user-service
 				data-source-ref="dataSource"
-				users-by-username-query="select username,password,enabled from users where username=?"
-				authorities-by-username-query="select u1.username, u2.authority from users u1, authorities u2 where u1.username = u2.username and u1.username =?" />
-		</security:authentication-provider>
-	</security:authentication-manager> 	
-	
- -->
- 
- 
-</beans>
+				users-by-username-query="select userName,password,enabled from user where userName=?"
+				authorities-by-username-query="select  userName, role_name as authorities   
+											   from user u , USER_ROLE ur, role r  
+											   where  u.user_id = ur.user_id
+   											   AND ur.role_id = r.role_id AND userName =?" />
+		</authentication-provider>
+	</authentication-manager>
+
+</beans:beans>
+
+
+
+

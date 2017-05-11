@@ -31,7 +31,7 @@
 			<div class="inner">
 				<div class="row">
 					<div class="col-lg-12">
-						<h1 class="page-header">Grid</h1>
+						<h1 class="page-header"></h1>
 					</div>
 				</div>
 
@@ -75,7 +75,7 @@
 
 											<select id="category" name="category"
 												style="padding: 5px 30px;">
-												<option value="">--Select Category--</option>
+												<option value="0">--Select Category--</option>
 												<c:forEach var="item" items="${categoryList}">
 													<option value="${item.catId}">${item.description}</option>
 												</c:forEach>
@@ -102,10 +102,9 @@
 										</div>
 									</div>
 
-
+<!-- 
 									<c:forEach items="${question.answers}" varStatus="vs">
 										<div class="form-group">
-
 											<label for="text1" class="control-label col-lg-4">
 												<form:radiobutton path="answerCollection[${vs.index}]"></form:radiobutton>
 
@@ -117,9 +116,41 @@
 											</div>
 
 										</div>
-
 									</c:forEach>
+-->
+										<div class="form-group">
+											<label for="text1" class="control-label col-lg-4">
+												<input type="radio"/>
+											</label>
 
+											<div class="col-lg-8">
+												<input type="text"  placeholder="Answer"/>
+											</div>
+										</div>										<div class="form-group">
+											<label for="text1" class="control-label col-lg-4">
+												<input type="radio"/>
+											</label>
+
+											<div class="col-lg-8">
+												<input type="text"  placeholder="Answer"/>
+											</div>
+										</div>										<div class="form-group">
+											<label for="text1" class="control-label col-lg-4">
+												<input type="radio"/>
+											</label>
+
+											<div class="col-lg-8">
+												<input type="text"  placeholder="Answer"/>
+											</div>
+										</div>										<div class="form-group">
+											<label for="text1" class="control-label col-lg-4">
+												<input type="radio"/>
+											</label>
+
+											<div class="col-lg-8">
+												<input type="text"  placeholder="Answer"/>
+											</div>
+										</div>
 
 									<div class="form-group pull-right">
 										<div class="col-lg-8">
@@ -160,8 +191,27 @@
 	<script
 		src='<spring:url value="/resources/plugins/modernizr-2.6.2-respond-1.1.0.min.js"></spring:url>'></script>
 
-	<script
-		src='<spring:url value="/resources/js/categorySelectEvent.js"></spring:url>'></script>
+	<script>
+	var categories = eval('(' + '${categoriesJSON}' + ')');
+	
+	$(document).ready(
+			function() {
+				$('#category').on('change', function() {
+					var selectedIndex = $("#category option:selected").index();
+					if (selectedIndex != 0) {
+						listSubCat = categories[selectedIndex - 1].listSubcat
+						$('#subcategory').html(
+							listSubCat.map(function(subCat) {
+								return '<option value="'+ subCat["subCatId"] + '">' + subCat["description"] + '</option>';
+							}));
+					} else {
+						$('#subCatCheckBox').html("");
+					}
+				});
+		});
+	</script>
+
+<%-- 	<script	src='<spring:url value="/resources/js/categorySelectEvent.js"></spring:url>'></script> --%>
 
 
 	<!-- END GLOBAL SCRIPTS -->

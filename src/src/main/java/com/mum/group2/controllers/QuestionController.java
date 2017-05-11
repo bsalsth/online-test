@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.mum.group2.bean.BeanCategory;
 import com.mum.group2.domain.Answer;
 import com.mum.group2.domain.Category;
 import com.mum.group2.domain.Question;
@@ -20,6 +21,8 @@ import com.mum.group2.domain.SubCategory;
 import com.mum.group2.services.CategoryService;
 import com.mum.group2.services.QuestionService;
 import com.mum.group2.services.SubCategoryService;
+
+import net.sf.json.JSONArray;
 
 @Controller
 @RequestMapping("/question")
@@ -46,6 +49,8 @@ public class QuestionController {
 		}
 		question.setAnswers(answers);
 		model.addAttribute("question", question);
+		List<BeanCategory> beanCategoriesModel = categoryService.getAllCategories(0);
+		model.addAttribute("categoriesJSON", JSONArray.fromObject(beanCategoriesModel));
 
 		return "addQuestion";
 	}

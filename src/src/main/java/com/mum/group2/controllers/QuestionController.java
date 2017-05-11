@@ -1,8 +1,7 @@
 package com.mum.group2.controllers;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,12 +10,16 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.mum.group2.domain.Answer;
 import com.mum.group2.domain.Category;
 import com.mum.group2.domain.Question;
+import com.mum.group2.domain.SubCategory;
 import com.mum.group2.services.CategoryService;
 import com.mum.group2.services.QuestionService;
+import com.mum.group2.services.SubCategoryService;
 
 @Controller
 @RequestMapping("/question")
@@ -26,25 +29,25 @@ public class QuestionController {
 	CategoryService categoryService;
 
 	@Autowired
+	SubCategoryService subCategoryService;
+
+	@Autowired
 	QuestionService questionService;
 
-
-	
 	@RequestMapping(value = "/questionForm", method = RequestMethod.GET)
 	public String questionForm(Model model) {
-		model.addAttribute("command", new Question());
-		return "addQuestion";
-	}
-
-	@ModelAttribute("categoryMap")
-	public Map<Integer, String> getCategoryMap() {
-		List<Category> list = categoryService.findAllCategories();
-		Map<Integer, String> categoryMap = new HashMap<Integer, String>();
-		for (Category category : list) {
-			categoryMap.put(category.getCatId(), category.getDescription());
+	
+		List<Category> categoryList = categoryService.findAllCategories();
+		model.addAttribute("categoryList", categoryList);
+		Question question = new Question();
+		List<Answer> answers = new ArrayList<Answer>();
+		for (int i = 0; i < 5; i++) {
+			answers.add(new Answer());
 		}
+		question.setAnswers(answers);
+		model.addAttribute("question", question);
 
-		return categoryMap;
+		return "addQuestion";
 	}
 
 	/*
@@ -87,6 +90,12 @@ public class QuestionController {
 	public ModelAndView viewQuestion() {
 		List<Question> list = questionService.findAllQuestions();
 		return new ModelAndView("questions", "list", list);
+	}
+
+	@RequestMapping(value = "/getSubCategoryList/{id}", method = RequestMethod.GET)
+	public @ResponseBody List<SubCategory> getSubCategory(
+			@PathVariable("id") Integer id, Model model) {
+		return subCategoryService.getSubCategoriesByCategoryId(id);
 	}
 
 }

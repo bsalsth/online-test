@@ -1,3 +1,8 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 
 <!-- BEGIN BODY -->
@@ -65,9 +70,13 @@
 									<div class="form-group">
 										<label class="control-label col-lg-4">Select Category</label>
 										<div class="col-lg-8">
-											<select class="form-control">
-												<option value="1">Java</option>
-												<option>Dot Net</option>
+
+											<select id="category" name="category"
+												style="padding: 5px 30px;">
+												<option value="">--Select Category--</option>
+												<c:forEach var="item" items="${categoryList}">
+													<option value="${item.catId}">${item.description}</option>
+												</c:forEach>
 											</select>
 										</div>
 									</div>
@@ -76,9 +85,9 @@
 										<label class="control-label col-lg-4">Select Sub
 											Category</label>
 										<div class="col-lg-8">
-											<select class="form-control">
-												<option value="1">J2EE</option>
-												<option>Dot Net</option>
+											<select id="subcategory" name="subcategory"
+												style="padding: 5px 30px;">
+
 											</select>
 										</div>
 									</div>
@@ -86,60 +95,29 @@
 									<div class="form-group">
 										<label for="text1" class="control-label col-lg-4">Question</label>
 										<div class="col-lg-8">
-											<textarea class="form-control" rows=""></textarea>
-
+											<form:textarea path="question.description" class="form-control"
+												id="question" name="question"
+												placeholder="Please enter your question" />
 										</div>
 									</div>
 
 
-									<div class="form-group">
-										<label for="text1" class="control-label col-lg-4">1. <input
-											type="radio" name="answer" value="" />
+									<c:forEach items="${question.answers}" varStatus="vs">
+										<div class="form-group">
+											<div class="col-sm-1"></div>
+											<div class="col-sm-9">
+												<form:input type="text" path="question.answers[${vs.index}]"
+													class="form-control" id="answer" name="question"
+													placeholder="Enter option here" />
+												<form:radiobutton path="question.answers[${vs.index}]"
+													id="checkbox_ans" name="checkbox_ans" class="checkbox_ans"></form:radiobutton>
 
-										</label>
-
-										<div class="col-lg-8">
-											<input type="text" id="text1" placeholder="Option"
-												class="form-control" />
+											</div>
 										</div>
-									</div>
-
-									<div class="form-group">
-										<label for="text1" class="control-label col-lg-4">2. <input
-											type="radio" name="answer" value="" />
+										<br />
+									</c:forEach>
 
 
-										</label>
-
-										<div class="col-lg-8">
-											<input type="text" id="text1" placeholder="Option"
-												class="form-control" />
-										</div>
-									</div>
-
-									<div class="form-group">
-										<label for="text1" class="control-label col-lg-4">3. <input
-											type="radio" name="answer" value="" />
-
-										</label>
-
-										<div class="col-lg-8">
-											<input type="text" id="text1" placeholder="Option"
-												class="form-control" />
-										</div>
-									</div>
-
-									<div class="form-group">
-										<label for="text1" class="control-label col-lg-4">4. <input
-											type="radio" name="answer" value="" />
-
-										</label>
-
-										<div class="col-lg-8">
-											<input type="text" id="text1" placeholder="Option"
-												class="form-control" />
-										</div>
-									</div>
 									<div class="form-group pull-right">
 										<div class="col-lg-8">
 											<a href="#" class="btn btn-primary">Add</a>
@@ -168,9 +146,21 @@
 
 
 	<!-- GLOBAL SCRIPTS -->
-	<script src="resources/plugins/jquery-2.0.3.min.js"></script>
-	<script src="resources/plugins/bootstrap/js/bootstrap.min.js"></script>
-	<script src="resources/plugins/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+
+	<script
+		src='<spring:url value="/resources/plugins/jquery-2.0.3.min.js"></spring:url>'></script>
+
+
+	<script
+		src='<spring:url value="/resources/plugins/bootstrap/js/bootstrap.min.js"></spring:url>'></script>
+
+	<script
+		src='<spring:url value="/resources/plugins/modernizr-2.6.2-respond-1.1.0.min.js"></spring:url>'></script>
+
+	<script
+		src='<spring:url value="/resources/js/categorySelectEvent.js"></spring:url>'></script>
+
+
 	<!-- END GLOBAL SCRIPTS -->
 
 </body>

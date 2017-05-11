@@ -21,4 +21,6 @@ public interface SubCategoryService {
 	
 	
 	public SubCategory findByDescription(String description);
+	
+	public List<SubCategory> getSubCategoriesByCategoryId(int catId);
 }

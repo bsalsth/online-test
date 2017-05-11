@@ -1,6 +1,10 @@
 package com.mum.group2.repositories;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.mum.group2.domain.SubCategory;
@@ -15,5 +19,8 @@ public interface SubCategoryRepository extends JpaRepository<SubCategory, Intege
 //	public List<Question> getFirstNQuestion(@Param("subCatId") int subCatId, @Param("numQuestionn") int numQuestionn);
 	
 	public SubCategory findByDescription(String description);
+	
+	@Query("select s from SubCategory as s where s.category.catId= :catId")
+	public List<SubCategory> getSubCategoriesByCategoryId(@Param("catId") Integer catId);
 	
 }

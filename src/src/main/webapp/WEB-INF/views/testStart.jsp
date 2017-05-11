@@ -32,7 +32,7 @@
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
 <body class="padTop53 ">
-	<form:form action="${pageContext.request.contextPath}/test/start" modelAttribute="beanTesting" method="POST">
+	<form:form action="${pageContext.request.contextPath}/test/start" modelAttribute="beanTesting" method="POST" onsubmit="return validateForm()">
 		<!-- MAIN WRAPPER -->
 		<div id="wrap">
 			<div class="row">
@@ -130,6 +130,19 @@ var x = setInterval(function() {
         form.submit();
     }
 }, 1000);
+
+var countChecked = function () {
+	return $("input[type='radio']:checked").val();
+};
+	
+function validateForm() {
+	isChecked = countChecked();
+	if (typeof isChecked == 'undefined') {
+		alert("You have to select an answer to continue to the next question.");
+		return false;
+	}
+	return true;
+}
 </script>
 
 </body>

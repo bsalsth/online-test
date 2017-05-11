@@ -96,18 +96,6 @@ public class TestController {
 		return "testFrontPage";
 	}
 
-//	@RequestMapping(value = "/testStatus", method = RequestMethod.POST)
-//	public String showStudentStatus(@ModelAttribute("userTestModel") BeanUserTest ut, Model model) {
-//		User student = us.get(ut.getUserId());
-//		Test t = student.getTestFromTestID(ut.getTestId());
-//		
-//		model.addAttribute("userModel", student);
-//		model.addAttribute("testModel", t);
-//		
-//		return "testInfo";
-//	}
-
-//	//For integration, following Jose approaching
 	@RequestMapping(value = "/testStatus", method = RequestMethod.POST)
 	public String showStudentStatus(@ModelAttribute("userTestModel") BeanUserTest ut, Model model) {
 		String accessKey = ut.getAccessKey();
@@ -133,6 +121,9 @@ public class TestController {
 		model.addAttribute("categoriesModel", beanCategoriesModel);
 		model.addAttribute("categoriesJSON", JSONArray.fromObject(beanCategoriesModel));
 		model.addAttribute("selectCatSubcat", new BeanSelectCatSubcat());
+		model.addAttribute("minSubcat", 
+				confService.findConfigurationValue(ConfigurationService.NUM_OF_SUBCATEGORIES_MIN));
+		model.addAttribute("maxSubcat", confService.findConfigurationValue(ConfigurationService.NUM_OF_SUBCATEGORIES_MAX));
 		return "testSelectCatSubcat";
 	}
 	

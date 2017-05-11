@@ -23,6 +23,19 @@
 				}
 			});
 	});
+
+	var countChecked = function () {
+		return $( "input[type='checkbox'].panel-default:checked" ).length;
+	};
+		
+	function validateForm() {
+		totalCubCatSelected = countChecked();
+		if (totalCubCatSelected >= ${minSubcat} && totalCubCatSelected <= ${maxSubcat}){
+			return true;
+		}
+		alert("You have to select " + ${minSubcat} + " to " + ${maxSubcat} + " sub category to test.");
+	    return false;
+	}
 </script>
 <!-- BEGIN BODY -->
 <body>
@@ -53,7 +66,8 @@
 										<div class="tab-content">
 											<div id="login" class="tab-pane active">
 												<form:form action="${pageContext.request.contextPath}/test/selectCatSubcat"
-													modelAttribute="selectCatSubcat" method="POST" class="form-horizontal">
+													modelAttribute="selectCatSubcat" method="POST" class="form-horizontal"
+													 onsubmit="return validateForm()">
 													<div class="form-group">
 														<label class="control-label col-lg-4">Category</label>
 														<div class="col-lg-6">

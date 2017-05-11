@@ -44,7 +44,7 @@
 								<div class="icons">
 									<i class="icon-edit"></i>
 								</div>
-								<h5>Edit User</h5>
+								<h5>Add Question</h5>
 								<div class="toolbar">
 									<ul class="nav">
 										<li><a href="#">Link</a></li>
@@ -65,8 +65,10 @@
 								</div>
 							</header>
 							<div id="div-1" class="accordion-body collapse in body">
-								<form class="form-horizontal">
 
+								<form:form modelAttribute="question"
+									action="/group2/question/saveQuestion" method="post"
+									class="form-horizontal">
 									<div class="form-group">
 										<label class="control-label col-lg-4">Select Category</label>
 										<div class="col-lg-8">
@@ -85,18 +87,17 @@
 										<label class="control-label col-lg-4">Select Sub
 											Category</label>
 										<div class="col-lg-8">
-											<select id="subcategory" name="subcategory"
+											<form:select path="subcategory.subCatId" id="subcategory"
 												style="padding: 5px 30px;">
 
-											</select>
+											</form:select>
 										</div>
 									</div>
 
 									<div class="form-group">
 										<label for="text1" class="control-label col-lg-4">Question</label>
 										<div class="col-lg-8">
-											<form:textarea path="question.description" class="form-control"
-												id="question" name="question"
+											<form:textarea path="description" class="form-control"
 												placeholder="Please enter your question" />
 										</div>
 									</div>
@@ -104,17 +105,19 @@
 
 									<c:forEach items="${question.answers}" varStatus="vs">
 										<div class="form-group">
-											<div class="col-sm-1"></div>
-											<div class="col-sm-9">
-												<form:input type="text" path="question.answers[${vs.index}]"
-													class="form-control" id="answer" name="question"
-													placeholder="Enter option here" />
-												<form:radiobutton path="question.answers[${vs.index}]"
-													id="checkbox_ans" name="checkbox_ans" class="checkbox_ans"></form:radiobutton>
 
+											<label for="text1" class="control-label col-lg-4">
+												<form:radiobutton path="answerCollection[${vs.index}]"></form:radiobutton>
+
+											</label>
+
+											<div class="col-lg-8">
+												<form:input type="text" path="answerCollection[${vs.index}]"
+													class="form-control" placeholder="Option" />
 											</div>
+
 										</div>
-										<br />
+
 									</c:forEach>
 
 
@@ -123,7 +126,7 @@
 											<a href="#" class="btn btn-primary">Add</a>
 										</div>
 									</div>
-								</form>
+								</form:form>
 							</div>
 						</div>
 					</div>

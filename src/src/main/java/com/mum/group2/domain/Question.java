@@ -17,6 +17,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -41,6 +42,18 @@ public class Question {
 	private boolean isActive;
 
 	private boolean isUsed;
+	
+	@Transient
+	private Category category;
+	
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="SUB_CAT_ID")
